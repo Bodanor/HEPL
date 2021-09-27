@@ -109,18 +109,34 @@ int main()
 
 	/*
 		i = i / 3 * i / 2;
-	*/
 	_asm {
 		mov eax, i
-		cdq
 		mov ebx, 3
+		cdq
 		idiv ebx
-		mov i, eax
 		imul eax, i
 		mov ebx, 2
+		cdq
 		idiv ebx
 		mov i, eax
-
+	}
+	*/
+	
+	/* i = i / 3 + i / 2;
+	_asm
+	{
+		mov eax, i
+		mov ebx, 3
+		cdq
+		idiv ebx
+		mov ecx, eax
+		mov eax, i
+		mov ebx, 2
+		cdq
+		idiv ebx
+		add eax, ecx
+		mov i, eax
 	}
 
+	*/
 }
