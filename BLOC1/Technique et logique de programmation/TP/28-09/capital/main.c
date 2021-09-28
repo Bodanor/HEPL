@@ -4,17 +4,17 @@
 int main()
 {
     int capital_depart, taux_interet;
-    float interret_obtenu;
+    float interet_obtenu;
 
-    capital_depart = interret_obtenu = taux_interet = 0;
+    capital_depart = interet_obtenu = taux_interet = 0;
     printf("Entrez le capital de depart \n:");
     scanf("%d", &capital_depart);
-    printf("Entrez le taux d'interets \n:");
+    printf("Entrez le taux d'interet \n:");
     scanf("%d", &taux_interet);
 
-    interret_obtenu = (capital_depart / 100.0) * taux_interet;
-    interret_obtenu += (float)capital_depart;
-    printf("Interrets obtenu apres 1 an : %f\n", interret_obtenu);
+    interet_obtenu = (capital_depart / 100.0) * taux_interet;
+    interet_obtenu += (float)capital_depart;
+    printf("Interrets obtenu apres 1 an : %f\n", interet_obtenu);
 
     return 0;
 }
