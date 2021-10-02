@@ -64,8 +64,6 @@ int main()
 
 	*/
 	
-	// Demander à la prof pour la propriété avec unsigned int et int qui prend le dessus.
-	// Demander aussi si comme la varibale i = signed, toute l'operation doit se passer en int aussi
 
 	/* i = (i1 * b1) / -(2 * b); // i = 10
 
@@ -120,12 +118,7 @@ int main()
 
 	*/
 	
-
 	/*
-	* Pourquoi mettre int alors que automatiquement le unsigned int devient un int.
-	* avec movsx edx, edx, la valeur devient différente.
-	*/
-	/* i = -(int)(i1 % b1 * (unsigned char)b); // i = -762 */
 	_asm
 	{
 		movzx ecx, b
@@ -137,6 +130,6 @@ int main()
 		neg edx
 		mov i, edx
 	}
-
+	*/
 
 }
