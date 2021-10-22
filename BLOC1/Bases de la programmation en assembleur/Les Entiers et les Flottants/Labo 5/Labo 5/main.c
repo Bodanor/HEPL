@@ -52,4 +52,17 @@ int main()
 	}
 	*/
 
+	/* f = (int)f / (b - 36); // f = 13.0
+	_asm
+	{
+		movss xmm0, f
+		cvtss2si eax, xmm0
+		movsx ebx,b
+		sub ebx,36
+		cdq
+		idiv ebx
+		cvtsi2ss xmm0, eax
+		movss f, xmm0
+	}
+	*/
 }

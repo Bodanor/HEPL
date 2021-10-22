@@ -31,7 +31,7 @@ int main()
 	}
 	*/
 
-	/* i = (float)i * 2 + f - 5.2 * b; // i = -115 */
+	/* i = (float)i * 2 + f - 5.2 * b; // i = -115
 
 	_asm
 	{
@@ -40,18 +40,29 @@ int main()
 		mov eax, 2
 		cvtsi2ss xmm1, eax
 		mulss xmm0, xmm1
-
 		movss xmm1, f52
 		movsx eax, b
 		cvtsi2ss xmm2,eax
 		mulss xmm1, xmm2
-
 		addss xmm0, f
 		subss xmm0, xmm1
 		cvttss2si eax, xmm0
 		mov i, eax
 
 	}
+	*/
 
+	/* f = (int)f / (b - 36); // f = 13.0 */
+	_asm
+	{
+		movss xmm0, f
+		cvtss2si eax, xmm0
+		movsx ebx,b
+		sub ebx,36
+		cdq
+		idiv ebx
+		cvtsi2ss xmm0, eax
+		movss f, xmm0
 
+	}
 }
