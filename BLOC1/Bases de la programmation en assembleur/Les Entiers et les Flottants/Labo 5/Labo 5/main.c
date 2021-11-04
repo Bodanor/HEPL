@@ -65,4 +65,56 @@ int main()
 		movss f, xmm0
 	}
 	*/
+
+	/* i = (float)d * 2 + f - 5 * b; // i = -141
+	_asm
+	{
+		cvtsd2ss xmm0, d
+		mov eax, 2
+		cvtsi2ss xmm1, eax
+		mulss xmm0, xmm1
+		mov eax, 5
+		movsx ebx, b
+		imul eax, ebx
+		addss xmm0, f
+		cvtsi2ss xmm1, eax
+		subss xmm0, xmm1
+		cvttss2si eax, xmm0
+		mov i, eax
+	}
+	*/
+	/* d = ((int)d * 1000) / (f - 20); // d = 92.30769348...
+	_asm
+	{
+		cvttsd2si eax, d
+		imul eax, 1000
+		movss xmm1, f
+		mov ebx, 20
+		cvtsi2ss xmm2, ebx
+		subss xmm1, xmm2
+		cvtsi2ss xmm0, eax
+		divss xmm0, xmm1
+		cvtss2sd xmm0, xmm0
+		movsd d, xmm0
+	}
+	*/
+	/* d = -((double)b + (int)d * i) / 2.3; // d = -43.478260... 
+	const double dconst = -1;
+	const double d23 = 2.3;
+	_asm
+	{
+		cvttsd2si eax, d
+		imul eax, i
+		cvtsi2sd xmm0, b
+		cvtsi2sd xmm1, eax
+		addsd xmm0, xmm1
+		movsd xmm1, dconst
+		mulsd xmm0, xmm1
+		movsd xmm1, d23
+		divsd xmm0, xmm1
+		movsd d, xmm0
+	}
+	*/
+
+
 }
