@@ -163,4 +163,28 @@ int main()
 		movss f, xmm2
 	}
 	*/
+
+/* i = (double)--j + ~(int)f--; // i = -339, j = -126, f = 211.899994
+	const float fconst = 1;
+	_asm
+	{
+		dec j
+		cvtsi2sd xmm0, j
+		cvttss2si eax, f
+		not eax
+		cvtsi2sd xmm1, eax
+		addsd xmm0, xmm1
+		cvttsd2si eax, xmm0
+		mov i, eax
+		movss xmm0, f
+		subss xmm0, fconst
+		movss f, xmm0
+	}
+	*/
+	/* i = -j / 2 + --f + (int)f85 / 2.3; // i = 270, f = 211.899994 */
+	const float dconst = 1;
+	_asm
+	{
+
+	}
 }
