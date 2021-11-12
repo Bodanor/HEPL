@@ -181,10 +181,110 @@ int main()
 		movss f, xmm0
 	}
 	*/
-	/* i = -j / 2 + --f + (int)f85 / 2.3; // i = 270, f = 211.899994 */
+	/* i = -j / 2 + --f + (int)f85 / 2.3; // i = 270, f = 211.899994
 	const float dconst = 1;
+	const double d23 = 2.3;
+
+	_asm
+	{
+		movss xmm0, f
+		subss xmm0, dconst
+		movss f, xmm0
+
+		mov eax, j
+		neg eax
+
+		cvttss2si ecx, f85
+
+		mov ebx, 2
+		cdq
+		idiv ebx
+
+		cvtsi2sd xmm0, ecx
+		divsd xmm0, d23
+
+		cvtsi2ss xmm1, eax
+		addss xmm1, f
+
+		cvtss2sd xmm1, xmm1
+		addsd xmm0, xmm1
+
+		cvttsd2si eax, xmm0
+		mov i, eax
+
+	}
+	*/
+
+	/* f = --f + (0xf2 | i++) * (double)--b * 1 / -f; // f = 210.182205, i = -109, b = -26
+	const float fconst = -1;
 	_asm
 	{
 
+		movsx eax, b
+		dec eax
+		mov b, al
+
+		movss xmm0, f
+		subss xmm0, fconst1
+		movss f, xmm0
+
+		mov eax, 0xf2
+		mov ebx, i
+		or eax, ebx
+
+		movsx ebx, b
+		cvtsi2sd xmm0, ebx
+
+		movss xmm1, f
+		mulss xmm1, fconst
+
+		cvtsi2sd xmm2, eax
+		mulsd xmm0, xmm2
+		mov ebx, 1
+		cvtsi2sd xmm2, ebx
+		mulsd xmm0, xmm2
+		cvtss2sd xmm1, xmm1
+		divsd xmm0, xmm1
+
+		cvtss2sd xmm1, f
+		addsd xmm0, xmm1
+
+		cvtsd2ss xmm0, xmm0
+		movss f, xmm0
+
+		mov eax, i
+		inc i
+		mov i, eax
 	}
+	*/
+	/* d = ((int)f + 0.5 * i) / (float)b + (int)++f; // d = 206.6800..., f = 213.899994
+	const double d05 = 0.5;
+	_asm
+	{
+		movss xmm0, f
+		addss xmm0, fconst1
+		movss f, xmm0
+
+		cvttss2si eax, f
+		movsd xmm0, d05
+		cvtsi2sd xmm1, i
+		mulsd xmm0, xmm1
+		cvtsi2sd xmm1, eax
+		addsd xmm0, xmm1
+
+		movsx eax, b
+		cvtsi2ss xmm1, eax
+
+		cvttss2si eax, f
+		
+		cvtss2sd xmm1, xmm1
+		divsd xmm0, xmm1
+
+		cvtsi2sd xmm1, eax
+		addsd xmm0, xmm1
+
+		movsd d, xmm0
+
+	}
+	*/
 }
