@@ -60,4 +60,128 @@ int main()
 		movsd QWORD PTR[eax], xmm0
 	}
 	*/
+
+	/* s = ++s * -(*pi)-- / 2 * ~(*ps)--; // s = -43, i = -4
+	_asm
+	{
+		inc s
+		mov eax, pi
+		mov ebx, DWORD PTR [eax]
+		neg ebx
+
+		mov eax, ps
+		movsx ecx, WORD PTR[eax]
+		not ecx 
+		movsx edx, s
+		imul ebx, edx
+		mov eax, ebx
+		mov ebx, 2
+		cdq
+		idiv ebx
+		imul eax, ecx
+		mov s, ax
+		dec ecx
+		mov eax, pi
+		mov ebx, DWORD PTR[eax]
+		dec ebx
+		mov DWORD PTR[eax], ebx
+		mov eax, ps
+		movsx ebx, WORD PTR[eax]
+		dec ebx
+		mov WORD PTR[eax], bx
+	}
+	*/
+	/* *ps = -*pb * -(float)*ps * 3.5; // s = -28
+	const float fconst = -1;
+	const float f35 = 3.5;
+	_asm
+	{
+		mov eax, ps
+		movsx ebx, WORD PTR[eax]
+		cvtsi2ss xmm0, ebx
+		mulss xmm0, fconst
+
+		mov eax, pb
+		movsx ebx, BYTE PTR[eax]
+		neg ebx
+		cvtsi2ss xmm1, ebx
+		mulss xmm0, xmm1
+		mulss xmm0, f35
+		cvttss2si ebx, xmm0
+		mov eax, ps
+		mov WORD PTR [eax], bx
+	}
+	*/
+	/* s = s * (*pi)-- / 2 + --b * (*ps)--; // s = -19, i = -4, b = -3
+	_asm
+	{
+		dec b
+		movsx eax, s
+		mov ebx, pi
+		mov ecx, DWORD PTR[ebx]
+		imul eax, ecx
+		mov ebx, 2
+		cdq
+		idiv ebx
+		movsx ebx, b
+		mov ecx, ps
+		movsx edx, WORD PTR [ecx]
+		imul ebx, edx
+		add eax, ebx
+		mov s, ax
+
+		mov eax, ps
+		movsx ebx, WORD PTR [eax]
+		dec ebx
+		mov WORD PTR[eax], bx
+
+		mov eax, pi
+		mov ebx, DWORD PTR [eax]
+		dec ebx
+		mov DWORD PTR[eax], ebx
+	}
+	*/
+	
+	/* i = ~i * (5.3 * (float)*pb); // i = -21
+	const float f53 = 5.3;
+	_asm
+	{
+		mov eax, pb
+		movsx ebx, BYTE PTR [eax]
+		cvtsi2ss xmm0, ebx
+		mulss xmm0, f53
+		mov eax, i
+		not eax
+		cvtsi2ss xmm1, eax
+		mulss xmm0, xmm1
+		cvttss2si eax, xmm0
+		mov i, eax
+	}
+	*/
+	/* *pd = (float)i * 2.45 + (int)*pf - ((int)(5.8 * b) | 0xff); // d = 45.649999...
+	const double f58 = 5.8, f245 = 2.45;
+	_asm
+	{
+		movsx eax, b
+		cvtsi2sd xmm0, eax
+		mulsd xmm0, f58
+		cvttsd2si eax, xmm0
+		or eax, 0xff // EAX contient tout ce qui est a droite
+
+		mov ebx, i
+		cvtsi2ss xmm0, ebx
+		mov ecx, pf
+		movss xmm1, DWORD PTR [ecx]
+		cvttss2si ebx, xmm1 // ebx = (int)*pf
+
+		cvtss2sd xmm0, xmm0
+		mulsd xmm0, f245
+		cvtsi2sd xmm1, ebx
+		addsd xmm0, xmm1
+		cvtsi2sd xmm1, eax
+		subsd xmm0, xmm1
+		mov eax, pd
+		movsd DWORD PTR [eax], xmm0
+	}
+	*/
 }
