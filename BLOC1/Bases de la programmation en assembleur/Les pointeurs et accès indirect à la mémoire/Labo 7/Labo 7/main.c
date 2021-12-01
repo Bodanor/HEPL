@@ -184,4 +184,29 @@ int main()
 		movsd DWORD PTR [eax], xmm0
 	}
 	*/
+	
+	/* f = ++b + -(float)(*pd)-- * ++i; // f = 5.28000021, b = -1, d = 2.14, b = , i = -2
+	const float fconst = -1;
+	const double dconst = 1;
+	_asm
+	{
+		inc b
+		inc i
+		mov eax, pd
+		movsd xmm0, QWORD PTR [eax]
+		cvtsd2ss xmm0, xmm0
+		mulss xmm0, fconst
+		cvtsi2ss xmm1, i
+		mulss xmm0, xmm1
+		movsx eax, b
+		cvtsi2ss xmm1, eax
+		addss xmm0, xmm1
+		movss f, xmm0
+		mov eax, pd
+		movsd xmm0, QWORD PTR [eax]
+		subsd xmm0, dconst
+		movsd QWORD PTR[eax], xmm0
+	}
+	*/
+
 }
