@@ -237,7 +237,7 @@ int main()
 	}
 		*/
 
-/* *pi = (float)i * f + (int)*pf - 15435 / (float)*pb; // i = 7612
+/* *pi = (float)i * f + (int)*pf - 15435 / (float)*pb; // i = 7612 */
 	const double d15435 = 15435;
 	_asm
 	{
@@ -259,7 +259,7 @@ int main()
 		cvttss2si eax, xmm0
 		mov ebx, pi
 		mov DWORD PTR [ebx], eax
+
 	}
-	*/
 
 }
