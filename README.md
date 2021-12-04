@@ -16,5 +16,5 @@
 
 ## Bon a savoir :
 
-* Dans chaque Labo, on peux trouver le PDF qui va avec. Ex : pour le labo 9 pour toruver le pdf : 
+* Dans chaque Labo, on peux trouver le PDF qui va avec. Ex : pour le labo 9 pour trouver le pdf : 
   * Dossier Labo 9 --> Dossier Labo 9 --> *PDF*
