@@ -6,6 +6,12 @@ int i = 0xff1, * pi = &i;
 float f = 352.318, * pf = &f;
 double d = 975.24, * pd = &d;
 
+/*
+ * Ici, j'utilise des variables pour stocker le resultat de chaque fonction comme rien ne me l'interdit. Cependant, ca reste quand meme une mauvaise chose ...
+ * Par après, pour contourner cela, etant donner qu'on ne peux push un registre xmm0, il faut "coder" l'instruction push manuellement
+ * Donc dans les prochains exercices je n'utiliserais que des push et pop pour stocker les resultats !
+ */
+
 
 
 /*
@@ -160,6 +166,46 @@ int main()
 		mov eax, dword ptr[eax]
 		cvttsd2si ebx, xmm0
 		mov i, ebx
+	}
+	*/
+	
+	/* f = pow(*pd, 3) / (*pb * 15 - sqrt(36)); // f = -4015342.00
+	const double d36 = 36;
+	const double d3 = 3;
+	double dtemp, dtemp1;
+	_asm
+	{
+		mov eax, pb
+		movsx eax, BYTE PTR[eax]
+		imul eax, 15
+		push eax
+		push dword ptr d36 + 4
+		push dword ptr d36
+		call dword ptr sqrt
+		add esp, 8
+		pop eax
+		fstp dtemp
+		movsd xmm1, dtemp
+		cvtsi2sd xmm0, eax
+		subsd xmm0, xmm1
+		movsd dtemp, xmm0
+		
+
+		push qword ptr d3 + 4
+		push qword ptr d3
+		mov ebx, pd
+		movsd xmm1, qword ptr[ebx]
+		sub esp, 8
+		movsd qword ptr[esp], xmm1
+		call qword ptr pow
+		fstp dtemp1
+
+		movsd xmm0, dtemp
+		movsd xmm1, dtemp1
+		divsd xmm1, xmm0
+
+		cvtsd2ss xmm1, xmm1
+		movss f, xmm1
 	}
 	*/
 
