@@ -9,7 +9,7 @@ double d = 975.24, * pd = &d;
 /*
  * Ici, j'utilise des variables pour stocker le resultat de chaque fonction comme rien ne me l'interdit. Cependant, ca reste quand meme une mauvaise chose ...
  * Par après, pour contourner cela, etant donner qu'on ne peux push un registre xmm0, il faut "coder" l'instruction push manuellement
- * Donc dans les prochains exercices je n'utiliserais que des push et pop pour stocker les resultats !
+ * Donc dans les prochains exercices je n'utiliserais que des movsd qword ptr[esp] pour stocker les resultats !
  */
 
 
@@ -208,5 +208,83 @@ int main()
 		movss f, xmm1
 	}
 	*/
+	
+	/* *pi = ((int)floor(*pd) | 0xf00f) - 2 + fabs(b * f); // i = 67697
+	double dtemp;
+	_asm
+	{
+		mov eax, pd
+		movsd xmm0, QWORD PTR[eax]
+		sub esp, 8
+		movsd QWORD PTR[esp], xmm0
+		call qword ptr floor
+		add esp, 8
+		fstp dtemp
+		movsd xmm0, dtemp
+		cvttsd2si eax, xmm0
+		or eax, 0xf00f
+		sub eax, 2
+		push eax
+		movsx ebx, b
+		cvtsi2ss xmm0, ebx
+		mulss xmm0, f
+		cvtss2sd xmm0, xmm0
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		call qword ptr fabs
+		add esp, 8
+		fstp dtemp
+		movsd xmm0, dtemp
+		pop eax
+		cvtsi2sd xmm1, eax
+		addsd xmm1, xmm0
+		cvttsd2si eax, xmm1
+		mov ebx, pi
+		mov DWORD PTR[ebx], eax
+	}
+	*/
+
+	/* d = -sin(b * 3 + 5) + pow(*pi + *pd + f, 3); // d = 158213840345.31961
+	double dtemp;
+	const double d3 = 3, dconst_neg = -1;
+	_asm
+	{
+		movsx eax, b
+		imul eax, 3
+		add eax, 5
+		cvtsi2sd xmm0, eax
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		call qword ptr sin
+		add esp, 8
+		fstp dtemp
+		movsd xmm0, dtemp
+		mulsd xmm0, dconst_neg
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		// Push du deuxieme parametre
+		push qword ptr d3 + 4
+		push qword ptr d3
+		mov eax, pi
+		mov eax, dword ptr[eax]
+		mov ebx, pd
+		movsd xmm1, qword ptr[ebx]
+		cvtsi2sd xmm2, eax
+		addsd xmm1, xmm2
+		movss xmm2, f
+		cvtss2sd xmm2, xmm2
+		addsd xmm1, xmm2
+		sub esp, 8
+		movsd qword ptr[esp], xmm1
+		call qword ptr pow
+		add esp, 16
+		fstp dtemp
+		movsd xmm1, dtemp
+		movsd xmm0, qword ptr[esp]
+		addsd xmm0, xmm1
+		movsd d, xmm0		
+	}
+	*/
+
 
 }
