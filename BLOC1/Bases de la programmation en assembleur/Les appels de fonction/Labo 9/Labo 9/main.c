@@ -286,5 +286,83 @@ int main()
 	}
 	*/
 
+/* f = cos(-i) * 100 - exp(b / 5 + 6) + *pf * d; // f = 343474.781
+	double dtemp;
+	const double d100 = 100;
+	_asm
+	{
+		movsx eax, b
+		mov ebx, 5
+		cdq
+		idiv ebx
+		add eax, 6
+		cvtsi2sd xmm0, eax
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		call qword ptr exp
+		add esp, 8
+		fstp dtemp
+		push dtemp + 4
+		push dtemp
+
+		mov eax, i
+		neg eax
+		cvtsi2sd xmm0, eax
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		call qword ptr cos
+		add esp, 8
+		fstp dtemp
+		movsd xmm0 , dtemp
+		mulsd xmm0, d100
+		movsd xmm1, qword ptr[esp]
+		add esp, 8
+		subsd xmm0, xmm1
+		mov eax, pf
+		movss xmm1, DWORD PTR[eax]
+		cvtss2sd xmm1, xmm1
+		mulsd xmm1, d
+		addsd xmm0, xmm1
+		cvtsd2ss xmm0, xmm0
+		movss f, xmm0
+	}
+	*/
+
+	/* • d = ceil(*pd * 3 + -i) / (cos(2.9) * 6); // d = 198.25776939662740
+	double dtemp;
+	const double d3 = 3;
+	const double d29 = 2.9;
+	const double d6 = 6;
+	_asm
+	{
+		mov ebx, i
+		neg ebx
+		mov eax, pd
+		movsd xmm0, qword ptr[eax]
+		mulsd xmm0, d3
+		cvtsi2sd xmm1, ebx
+		addsd xmm0, xmm1
+		sub esp, 8
+		movsd qword ptr[esp], xmm0
+		call qword ptr ceil
+		add esp, 8
+		fstp dtemp
+		sub esp, 8
+		movsd xmm0, dtemp
+		movsd qword ptr[esp], xmm0
+		push d29 + 4
+		push d29
+		call qword ptr cos
+		add esp, 8
+		fstp dtemp
+		movsd xmm1, dtemp
+		mulsd xmm1, d6
+		movsd xmm0, qword ptr[esp]
+		add esp, 8
+		divsd xmm0, xmm1
+		movsd d, xmm0
+	}
+	*/
+
 
 }
