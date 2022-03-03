@@ -36,13 +36,37 @@ int main()
 
 /* 2. Copier dans un vecteur de doubles uniquement les valeurs négatives figurant dans un
 vecteur d’entiers (par exemple, si VecEntiers contient [-9, 4, 8, -2, -7, 5], alors on aura dans
-VecDoubles [-9, -2, -7]). */
+VecDoubles [-9, -2, -7]).
 
-/*
 int vecentiers[6] = {-9, 4, 8, -2, -7, 5};
-dounle vecdouble[6];
+double vecdouble[6];
+int i = 0, b = 0;
 int main()
 {
+	_asm
+	{
+		nop
+	debutwhile:
+		mov eax, i
+		cmp eax, 6
+		jge finwhile
 
+		mov ebx, offset vecentiers
+		cmp dword ptr[ebx + eax*4], 0
+		jl ajouterdouble
+		inc i
+		jmp debutwhile
+
+	ajouterdouble:
+		cvtsi2sd xmm0, qword ptr[ebx + eax*4]
+		mov eax, b
+		mov ebx, offset vecdouble
+		movsd qword ptr[ebx + eax*8], xmm0
+		inc b
+		inc i
+		jmp debutwhile
+
+	finwhile:
+	}
 }
 */
