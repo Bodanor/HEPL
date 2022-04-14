@@ -93,4 +93,165 @@ void main()
 		add esp, 12
 	}
 }
+
+*/
+/*
+	3. Entrer 2 valeurs et saisir l'opération à réaliser sur ces 2 valeurs parmi : 1 pour +, 2 pour -, 3 pour * et 4 pour /, 
+	puis afficher le résultat de l’opération. 
+*/
+
+/*
+
+const char msgA[] = "Entrez la valeur de a :";
+const char msgB[] = "Entrez la valeur de b :";
+const char msgChoix[] = "Entrez l'operation a effectuer :\n1) Addition\n2) Soustraction\n3) Multiplication\n4) Division\n\nChoix :";
+const char formatSaisie[] = "%d";
+
+int operation, a, b;
+
+void main()
+{
+	_asm
+	{
+		push offset msgA
+		call dword ptr printf
+		add esp, 4
+
+		lea eax, a
+		push eax
+		push offset formatSaisie
+		call dword ptr scanf
+		add esp, 8
+
+		push offset msgB
+		call dword ptr printf
+		add esp, 4
+
+		lea eax, b
+		push eax
+		push offset formatSaisie
+		call dword ptr scanf
+		add esp, 8
+
+		push offset msgChoix
+		call dword ptr printf
+		add esp, 4
+
+		lea eax, operation
+		push eax
+		push offset formatSaisie
+		call dword ptr scanf
+		add esp, 8
+
+		mov eax, a
+		mov ebx, b
+
+		cmp operation, 1
+		je addition
+
+		cmp operation, 2
+		je soustraction
+
+		cmp operation, 3
+		je multiplication
+
+		cmp operation, 4
+		je division
+
+	addition:
+		add eax, ebx
+		jmp afficherResultat
+
+	soustraction:
+		sub eax, ebx
+		jmp afficherResultat
+
+	multiplication:
+		imul eax, ebx
+		jmp afficherResultat
+
+	division:
+		cdq
+		idiv ebx
+
+	afficherResultat:
+		push eax
+		push offset formatSaisie
+		call dword ptr printf
+		add esp, 8
+	}
+}
+*/
+
+/*
+	4. Entrer la taille pour les côtés a, b, c et d d'un quadrilatère. Afficher si ce quadrilatère est un
+	losange (a = b = c = d), un parallélogramme (a = c et b = d) ou une autre forme.
+/*
+
+/*
+
+double a, b, c, d;
+const char msg[] = "Entrez la taille de chaque cote d'un quadrilatere (separerer par un espace): ";
+const char formatsaisie[] = "%lf %lf %lf %lf";
+const char msglosange[] = "C'est un losange !\n";
+const char msgPara[] = "C'est un parallelogramme !\n";
+const char msgAutre[] = "C'est une autre forme !\n";
+
+void main()
+{
+	_asm
+	{
+		push offset msg
+		call dword ptr printf
+		add esp, 4
+
+		lea eax, d
+		push eax
+		lea eax, c
+		push eax
+		lea eax, b
+		push eax
+		lea eax, a
+		push eax
+		push offset formatsaisie
+		call dword ptr scanf
+		add esp, 20
+
+		movsd xmm0, a
+		comisd xmm0, b
+		jne compareother
+
+		comisd xmm0, c
+		jne compareother
+
+		comisd xmm0, d
+		jne compareother
+
+		push offset msglosange
+		call dword ptr printf
+		add esp, 4
+		jmp fin
+
+	compareother:
+		comisd xmm0, c
+		jne autreForme
+
+		movsd xmm0, b
+		comisd xmm0, d
+		jne autreForme
+
+		push offset msgPara
+		call dword ptr printf
+		add esp, 4
+
+		jmp fin
+
+	autreForme:
+		push offset msgAutre
+		call dword ptr printf
+		add esp, 4
+
+	fin:
+	}
+}
 */
