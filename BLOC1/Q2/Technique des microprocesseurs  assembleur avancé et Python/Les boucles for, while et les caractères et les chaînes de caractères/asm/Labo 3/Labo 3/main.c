@@ -91,3 +91,36 @@ void main()
 
 }
 */
+
+
+
+/* 2. Échanger 2 à 2 les caractères dans une chaîne de caractères (par exemple, pour la chaîne
+"bonjour", on aura "objnuor"). */
+
+/*
+char string[] = "bonjour";
+
+void main()
+{
+	_asm
+	{
+		mov eax, offset string
+		debutwhile :
+
+		cmp byte ptr[eax], 0
+			je finwhile
+
+			cmp byte ptr[eax + 1], 0
+			je finwhile
+
+			mov bl, byte ptr[eax + 1]
+			xchg bl, byte ptr[eax]
+			mov byte ptr[eax + 1], bl
+
+			add eax, 2
+			jmp debutwhile
+
+		finwhile:
+	}
+}
+*/
