@@ -20,16 +20,16 @@ ELEMENT Elm[] =
   {0,"",""}
 };
 
+static int index_tab = 1;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-
   //***** A modifier ***********************
-  setNom(Elm[1].nom);
-  setEmail(Elm[1].email);
+  setNom(Elm[index_tab].nom);
+  setEmail(Elm[index_tab].email);
   //****************************************
 }
 
@@ -68,18 +68,23 @@ void MainWindow::setEmail(const char* Text)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_pushButtonSuivant_clicked()
 {
-  fprintf(stderr,"Clic sur le bouton >>>\n");
-  // TO DO
+    fprintf(stderr,"Clic sur le bouton >>>\n");
+    if (index_tab < (int)(sizeof(Elm) / sizeof(Elm[0]))-2){
+        setNom(Elm[++index_tab].nom);
+        setEmail(Elm[index_tab].email);
+    }
 }
 
 void MainWindow::on_pushButtonPrecedent_clicked()
 {
   fprintf(stderr,"Clic sur le bouton <<<\n");
-  // TO DO
+    if (index_tab > 1){
+        setNom(Elm[--index_tab].nom);
+        setEmail(Elm[index_tab].email);
+    };
 }
 
 void MainWindow::on_pushButtonQuitter_clicked()
 {
-  fprintf(stderr,"Clic sur le bouton Quitter\n");
-  // TO DO
+    exit(0);
 }
