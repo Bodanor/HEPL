@@ -10,16 +10,20 @@ class Voiture
 {
     private:
         string nom;
-        Modele *modele;
+        Modele modele;
     
     public:
-       Voiture();
-       Voiture(const Voiture &);
-       Voiture(const string, Modele);
+        Voiture();
+        Voiture(const Voiture &);
+        Voiture(const string, Modele);
         ~Voiture();
+        
         const string getNom()const;
+        void setNom(string);
         void Affiche()const;
-
+        void setModele(const Modele &);
+        const Modele getModele() const;
+        void Affiche();
         
     
 };

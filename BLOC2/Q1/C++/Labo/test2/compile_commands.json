@@ -1,0 +1,21 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-g",
+      "-Wall",
+      "-W",
+      "-I",
+      "../Include/",
+      "../Source/Modele.o",
+      "../Source/Voiture.o",
+      "-o",
+      "prog",
+      "Test2a.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/Test2a.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/prog"
+  }
+]

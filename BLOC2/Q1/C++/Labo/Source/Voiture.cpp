@@ -16,7 +16,6 @@ Voiture::Voiture()
     #endif
     
     nom = "Voiture sans nom";
-    modele = new Modele;
 }
 
 Voiture::Voiture(const Voiture &voiture)
@@ -24,6 +23,53 @@ Voiture::Voiture(const Voiture &voiture)
     #ifdef DEBUG
         cout << "Constructeur de copie de Voiture" << endl;
     #endif
-    
 
+    setNom(voiture.getNom());
+    setModele(voiture.getModele());
+}
+
+Voiture::Voiture(string nom, Modele modele_voiture)
+{
+    #ifdef DEBUG
+        cout << "Constructeur de copie de Voiture" << endl;
+    #endif
+
+    setNom(nom);
+    setModele(modele_voiture);
+
+}
+
+void Voiture::Affiche()
+{
+    cout << "Nom de voiture :" << nom;
+    modele.Affiche();
+}
+
+Voiture::~Voiture()
+{
+    #ifdef DEBUG
+        cout << "Deconstructeur de Voiture" << endl;
+    #endif
+}
+
+const string Voiture::getNom() const
+{
+    return nom;
+}
+void Voiture::setNom(string nom_voiture)
+{
+    nom = nom_voiture;
+}
+
+void Voiture::setModele(const Modele &modele_voiture)
+{
+    /* Parce que le compilateur sais pas comment faire modele = modele ?
+     * Dois je copier chaque champs de modele ?
+    */
+    modele = modele_voiture;
+}
+
+const Modele Voiture::getModele() const
+{
+    return modele;
 }

@@ -13,17 +13,17 @@ int main()
     voiture.Affiche();
   }
 
-  //cout << endl << "(2) ***** Test des setters/getters *************************************************" << endl;
-  //{
-  //  Voiture v;
-  //  v.setNom("Projet_208_MrDugenou");
-  //  Modele m("208 Active 1.5 BlueHDi 5P",100,Diesel,21800.0f);
-  //  v.setModele(m);
-  //  v.Affiche();
-  //  cout << "Nom du projet : " << v.getNom() << endl;
-  //  cout << "Modele du projet : ";
-  //  v.getModele().Affiche();
-  //}
+  cout << endl << "(2) ***** Test des setters/getters *************************************************" << endl;
+  {
+    Voiture v;
+    v.setNom("Projet_208_MrDugenou");
+    Modele m("208 Active 1.5 BlueHDi 5P",100,Diesel,21800.0f);
+    v.setModele(m);
+    v.Affiche();
+    cout << "Nom du projet : " << v.getNom() << endl;
+    cout << "Modele du projet : ";
+    v.getModele().Affiche();
+  }
 
   //cout << endl << "(3) ***** Test du constructeur d'initialisation de Voiture *************************" << endl;
   //{
