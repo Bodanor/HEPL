@@ -41,7 +41,7 @@ Voiture::Voiture(string nom, Modele modele_voiture)
 
 void Voiture::Affiche()
 {
-    cout << "Nom de voiture :" << nom;
+    cout << "Nom de voiture :" << nom << endl;
     modele.Affiche();
 }
 

@@ -142,4 +142,13 @@ void Modele::Affiche()const
     }
     cout << endl;
     cout << "Prix : " << prix << "Euros" << endl;
+
+}
+void Modele::operator=(Modele modele)
+{
+    puissance = modele.puissance;
+    nom = new char [50];
+    strcpy(nom, modele.nom);
+    moteur = modele.moteur;
+    prix = modele.prix;
 }

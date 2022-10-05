@@ -16,7 +16,8 @@ class Modele
         Modele(const char *, int, Moteur, float);
         Modele(const Modele &);
         ~Modele();
-
+        
+        void operator=(Modele modele);
         const char * getNom()const;//"return de la variable"
         int getPuissance()const;
         Moteur getMoteur()const;

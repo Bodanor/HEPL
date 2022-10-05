@@ -1,7 +1,8 @@
 #include <iostream>
-using namespace std;
 #include "Modele.h"
 #include "Voiture.h"
+
+using namespace std;
 
 // Tests de base de la classe Voiture (sans les options)
 
