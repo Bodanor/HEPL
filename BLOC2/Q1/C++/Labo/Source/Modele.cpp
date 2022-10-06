@@ -76,7 +76,7 @@ Modele:: Modele(const char *n, int p, Moteur m, float pr)
 {
     #ifdef DEBUG
 
-        cout << "Construscteur d'initialisation de Modele" << endl;
+        cout << "Constructeur d'initialisation de Modele" << endl;
 
     #endif 
 
@@ -91,7 +91,7 @@ Modele::Modele(const Modele &source)
 {
     #ifdef DEBUG
 
-        cout << "Construscteur de copie de Modele" << endl;
+        cout << "Constructeur de copie de Modele" << endl;
 
     #endif 
 

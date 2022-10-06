@@ -34,7 +34,9 @@ int main()
   cout << "(6) ***** Test du constructeur de copie et du destructeur de Voiture ***************" << endl;
   {
     Voiture voiture2(voiture);
+    
     voiture2.RetireOption("0MM0");
+    
     cout << "Copie modifiee du projet de depart :" << endl;
     voiture2.Affiche();
     // on regarde comment se comporte le destructeur de Voiture :)

@@ -27,6 +27,9 @@ Voiture::Voiture(const Voiture &voiture)
 
     setNom(voiture.getNom());
     setModele(voiture.getModele());
+    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+        if (voiture.options[i] != NULL)
+            options[i] = new Option(*voiture.options[i]);
 }
 
 Voiture::Voiture(string nom, Modele modele_voiture)
@@ -97,10 +100,7 @@ void Voiture::AjouteOption(const Option & opt)
     while (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL)
         i++;
     if (i < (sizeof(options)/sizeof(options[0]))){
-        options[i] = new Option;
-        options[i]->setCode(opt.getCode());
-        options[i]->setIntitule(opt.getIntitule());
-        options[i]->setPrix(opt.getPrix());
+        options[i] = new Option(opt);
     }
 
 }
@@ -108,10 +108,10 @@ void Voiture::AjouteOption(const Option & opt)
 void Voiture::RetireOption(string code)
 {
     unsigned long i = 0;
-    while (i < (sizeof(options)/sizeof(options[0])) && options[i]->getCode() != code)
+    while (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL && options[i]->getCode() != code)
         i++;
 
-    if (i < (sizeof(options)/sizeof(options[0])) && options[i]->getCode() == code)
+    if (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL && options[i]->getCode() == code)
     {
         delete options[i];
         options[i] = NULL;
