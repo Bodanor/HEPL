@@ -16,6 +16,7 @@ Voiture::Voiture()
     #endif
     
     nom = "Voiture sans nom";
+
 }
 
 Voiture::Voiture(const Voiture &voiture)
@@ -41,8 +42,22 @@ Voiture::Voiture(string nom, Modele modele_voiture)
 
 void Voiture::Affiche()
 {
+    int nb_options = 0;
+
     cout << "Nom de voiture :" << nom << endl;
     modele.Affiche();
+
+    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    {
+        if (options[i] != NULL)
+            nb_options++;
+    }
+
+    cout << "Nombre total d'options : " << nb_options << endl;
+
+    for (unsigned long i = 0; i < (sizeof(options) / sizeof(options[0])); i++)
+        if (options[i] != NULL)
+            options[i]->Affiche();
 }
 
 Voiture::~Voiture()
@@ -50,6 +65,10 @@ Voiture::~Voiture()
     #ifdef DEBUG
         cout << "Deconstructeur de Voiture" << endl;
     #endif
+
+    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+        if (options[i] != NULL)
+            delete options[i];
 }
 
 const string Voiture::getNom() const
@@ -63,13 +82,52 @@ void Voiture::setNom(string nom_voiture)
 
 void Voiture::setModele(const Modele &modele_voiture)
 {
-    /* Parce que le compilateur sais pas comment faire modele = modele ?
-     * Dois je copier chaque champs de modele ?
-    */
     modele = modele_voiture;
 }
 
 const Modele Voiture::getModele() const
 {
     return modele;
+}
+
+void Voiture::AjouteOption(const Option & opt)
+{
+    unsigned long i = 0;
+
+    while (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL)
+        i++;
+    if (i < (sizeof(options)/sizeof(options[0]))){
+        options[i] = new Option;
+        options[i]->setCode(opt.getCode());
+        options[i]->setIntitule(opt.getIntitule());
+        options[i]->setPrix(opt.getPrix());
+    }
+
+}
+
+void Voiture::RetireOption(string code)
+{
+    unsigned long i = 0;
+    while (i < (sizeof(options)/sizeof(options[0])) && options[i]->getCode() != code)
+        i++;
+
+    if (i < (sizeof(options)/sizeof(options[0])) && options[i]->getCode() == code)
+    {
+        delete options[i];
+        options[i] = NULL;
+    }
+}
+
+float Voiture::getPrix()
+{
+    float prix_total = modele.getPrixDeBase();
+    
+    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    {
+        if (options[i] != NULL)
+            prix_total += options[i]->getPrix();
+    }
+
+    return prix_total;
+
 }

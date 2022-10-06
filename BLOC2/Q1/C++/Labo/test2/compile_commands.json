@@ -2,20 +2,124 @@
   {
     "arguments": [
       "/usr/bin/g++",
+      "-g",
+      "-Wall",
+      "-W",
+      "-D",
+      "DEBUG",
+      "-c",
+      "-I",
+      "../Include/",
+      "-o",
+      "../Source/Modele.o",
+      "../Source/Modele.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Modele.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Modele.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-g",
+      "-Wall",
+      "-W",
+      "-D",
+      "DEBUG",
+      "-c",
+      "-I",
+      "../Include/",
+      "-o",
+      "../Source/Option.o",
+      "../Source/Option.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Option.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Option.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-g",
+      "-Wall",
+      "-W",
+      "-D",
+      "DEBUG",
+      "-c",
+      "-I",
+      "../Include/",
+      "-o",
+      "../Source/Voiture.o",
+      "../Source/Voiture.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Voiture.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/Source/Voiture.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
       "-c",
       "-g",
       "-Wall",
       "-W",
+      "-D",
+      "DEBUG",
       "-I",
       "../Include/",
       "../Source/Modele.o",
+      "../Source/Option.o",
       "../Source/Voiture.o",
       "-o",
-      "prog",
+      "test2a",
       "Test2a.cpp"
     ],
     "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
     "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/Test2a.cpp",
-    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/prog"
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/test2a"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-g",
+      "-Wall",
+      "-W",
+      "-D",
+      "DEBUG",
+      "-I",
+      "../Include/",
+      "../Source/Modele.o",
+      "../Source/Option.o",
+      "../Source/Voiture.o",
+      "-o",
+      "test2b",
+      "Test2b.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/Test2b.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/test2b"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-g",
+      "-Wall",
+      "-W",
+      "-D",
+      "DEBUG",
+      "-I",
+      "../Include/",
+      "../Source/Modele.o",
+      "../Source/Option.o",
+      "../Source/Voiture.o",
+      "-o",
+      "test2c",
+      "Test2c.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2",
+    "file": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/Test2c.cpp",
+    "output": "/home/liwinux/Desktop/hepl/BLOC2/Q1/C++/Labo/test2/test2c"
   }
 ]
