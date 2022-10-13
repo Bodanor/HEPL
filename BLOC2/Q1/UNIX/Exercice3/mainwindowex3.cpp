@@ -137,18 +137,77 @@ const char* MainWindowEx3::getGroupe3()
 void MainWindowEx3::on_pushButtonLancerRecherche_clicked()
 {
   fprintf(stderr,"Clic sur le bouton Lancer Recherche\n");
-  // TO DO
   int idFils1,idFils2,idFils3;
+  int status;
+  int id;
+  char str[3];
+
+  if (ui->checkBoxRecherche1->isChecked() && getGroupe1() != NULL){
+    idFils1 = fork();
+    if (idFils1 == 0){
+        if (execlp("Lecture", "Lecture", getGroupe1(), NULL) == -1){
+          perror("Erreur du fils 1");
+          exit(1);
+        }
+
+    }
+  }
+  if (ui->checkBoxRecherche2->isChecked() && getGroupe2() != NULL){
+    idFils2 = fork();
+
+    if (idFils2 == 0){
+      if (execlp("Lecture", "Lecture", getGroupe2(), NULL) == -1){
+          perror("Erreur du fils 2");
+          exit(1);
+        }
+    }
+
+  }
+
+  if (ui->checkBoxRecherche3->isChecked() && getGroupe3() != NULL){
+    idFils3 = fork();
+
+    if (idFils3 == 0){
+      if (execlp("Lecture", "Lecture", getGroupe3(), NULL) == -1){
+          perror("Erreur du fils 3");
+          exit(1);
+        }
+    }
+  }
+
+  while ((id = wait(&status)) != -1){
+    if (WIFEXITED(status)){
+      if (id == idFils1){
+        sprintf(str, "%d", WEXITSTATUS(status));
+        ui->lineEditResultat1->setText(str);
+      }
+      else if (id == idFils2){
+        sprintf(str, "%d", WEXITSTATUS(status));
+        ui->lineEditResultat2->setText(str);
+      }
+      else if (id == idFils3){
+        sprintf(str, "%d", WEXITSTATUS(status));
+        ui->lineEditResultat3->setText(str);
+      }
+    } 
+  }
 }
 
 void MainWindowEx3::on_pushButtonVider_clicked()
 {
   fprintf(stderr,"Clic sur le bouton Vider\n");
+  ui->lineEditGroupe1->setText("");
+  ui->lineEditGroupe2->setText("");
+  ui->lineEditGroupe3->setText("");
+  ui->lineEditResultat3->setText("");
+  ui->lineEditResultat1->setText("");
+  ui->lineEditResultat2->setText("");
   // TO DO
 }
 
 void MainWindowEx3::on_pushButtonQuitter_clicked()
 {
   fprintf(stderr,"Clic sur le bouton Quitter\n");
-  // TO DO
+  exit(0);
+
 }

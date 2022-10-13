@@ -2,6 +2,8 @@
 #define MAINWINDOWEX3_H
 
 #include <QMainWindow>
+#include <unistd.h>
+#include <wait.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowEx3; }
