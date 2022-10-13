@@ -141,10 +141,20 @@ void MainWindowEx3::on_pushButtonLancerRecherche_clicked()
   int status;
   int id;
   char str[3];
+  int fd;
 
+  fd = open("Trace.log", O_CREAT | O_APPEND | O_WRONLY, 0666);
+  if (fd == -1)
+    printf("erreur\n");
+  
+  if (dup2(fd, fileno(stderr)) == -1){
+    printf("Erreur de dup\n");
+    exit(1);
+  }
   if (ui->checkBoxRecherche1->isChecked() && getGroupe1() != NULL){
     idFils1 = fork();
     if (idFils1 == 0){
+
         if (execlp("Lecture", "Lecture", getGroupe1(), NULL) == -1){
           perror("Erreur du fils 1");
           exit(1);

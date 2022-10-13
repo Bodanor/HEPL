@@ -25,3 +25,4 @@ clean:
 	rm -rf *.o
 	rm -rf Lecture
 	rm -rf CreationBD
+	rm -rf Trace.log

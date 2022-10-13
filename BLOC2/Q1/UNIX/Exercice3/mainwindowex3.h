@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <unistd.h>
 #include <wait.h>
+#include <fcntl.h>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowEx3; }
