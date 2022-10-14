@@ -147,6 +147,8 @@ void Modele::Affiche()const
 void Modele::operator=(Modele modele)
 {
     puissance = modele.puissance;
+    if (nom)
+        delete [] nom;
     nom = new char [50];
     strcpy(nom, modele.nom);
     moteur = modele.moteur;
