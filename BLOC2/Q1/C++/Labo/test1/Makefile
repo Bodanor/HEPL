@@ -16,3 +16,4 @@ prog: $(CPP_OBJECTS)
 clean:
 	rm -rf ../Source/*.o
 	rm -rf prog
+	rm -rf *.o

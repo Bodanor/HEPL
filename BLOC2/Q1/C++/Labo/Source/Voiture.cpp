@@ -16,7 +16,6 @@ Voiture::Voiture()
     #endif
     
     nom = "Voiture sans nom";
-
 }
 
 Voiture::Voiture(const Voiture &voiture)
@@ -27,9 +26,15 @@ Voiture::Voiture(const Voiture &voiture)
 
     setNom(voiture.getNom());
     setModele(voiture.getModele());
-    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+
+    for (unsigned int i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    {
         if (voiture.options[i] != NULL)
-            options[i] = new Option(*voiture.options[i]);
+            AjouteOption(*voiture.options[i]);
+    }
+
+
+ 
 }
 
 Voiture::Voiture(string nom, Modele modele_voiture)
@@ -136,15 +141,38 @@ Voiture& Voiture::operator=(const Voiture &source)
 {
     nom = source.getNom();
     modele = source.getModele();
-    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
-    {
-        if (source.options[i] != NULL)
-            AjouteOption(*source.options[i]);
-    }
 
+    for (unsigned int i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    {
+        if (source.options[i] != NULL){
+            if (options[i] != NULL)
+                delete options[i];
+        options[i] = new Option(*source.options[i]);
+
+        }
+
+    }
 
     return (*this);
 
+}
 
+Voiture operator+(Voiture src, Option opt)
+{
+    Voiture tmp(src);
+    unsigned long i = 0;
 
+    while (i < (sizeof(tmp.options)/sizeof(tmp.options[0])) && tmp.options[i] != NULL)
+        i++;
+    if (i < (sizeof(tmp.options)/sizeof(tmp.options[0]))){
+        tmp.AjouteOption(opt);
+    }
+
+    return tmp;
+
+}
+
+Voiture operator+(Option opt, Voiture src)
+{
+    return src + opt;
 }
