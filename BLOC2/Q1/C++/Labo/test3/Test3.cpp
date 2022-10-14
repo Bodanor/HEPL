@@ -5,8 +5,8 @@ using namespace std;
 
 int  Menu();
 void Essai1();
-/*void Essai2();
-void Essai3();
+void Essai2();
+/*void Essai3();
 void Essai4();
 void Essai5();
 void Essai6();
@@ -27,9 +27,8 @@ int main(int argc,char* argv[])
     {
 
       case 1 : Essai1(); break;
-      /*
       case 2 : Essai2(); break;
-      case 3 : Essai3(); break;
+      /*case 3 : Essai3(); break;
       case 4 : Essai4(); break;
       case 5 : Essai5(); break;
       case 6 : Essai6(); break;
@@ -100,7 +99,6 @@ void Essai1()
 /*******************************************************************************************************/
 /*** Tests des operateurs + de la classe Voiture *******************************************************/
 /*******************************************************************************************************/
-/*
 
 void Essai2()
 {
@@ -126,7 +124,6 @@ void Essai2()
   cout << "---- v2 (v + 3 options) ------------------------" << endl;
   v2.Affiche();
 }
-*/
 /*******************************************************************************************************/
 /*** Tests des opérateurs - de la classe Voiture *******************************************************/
 /*******************************************************************************************************/

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -Wall -W -D DEBUG
+CFLAGS = -g -Wall -W
 
 SRC_DIR := ../Source
 OBJ_DIR := ../Source
