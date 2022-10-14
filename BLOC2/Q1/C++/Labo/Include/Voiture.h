@@ -19,6 +19,8 @@ class Voiture
         Voiture(const Voiture &);
         Voiture(const string, Modele);
         ~Voiture();
+
+        Voiture& operator=(const Voiture&);
         
         const string getNom()const;
         void setNom(string);

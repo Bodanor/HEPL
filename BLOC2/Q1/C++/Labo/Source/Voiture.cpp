@@ -131,3 +131,20 @@ float Voiture::getPrix()
     return prix_total;
 
 }
+
+Voiture& Voiture::operator=(const Voiture &source)
+{
+    nom = source.getNom();
+    modele = source.getModele();
+    for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    {
+        if (source.options[i] != NULL)
+            AjouteOption(*source.options[i]);
+    }
+
+
+    return (*this);
+
+
+
+}
