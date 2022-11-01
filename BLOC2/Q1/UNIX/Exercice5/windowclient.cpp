@@ -27,7 +27,11 @@ WindowClient::WindowClient(QWidget *parent):QMainWindow(parent),ui(new Ui::Windo
   // Recuperation de l'identifiant de la file de messages
   fprintf(stderr,"(CLIENT %s %d) Recuperation de l'id de la file de messages\n",nomClient,getpid());
   // TO DO (etape 2)
-
+  
+  if ((idQ = msgget(CLE, 0)) == -1){
+      perror("Errur de recuperatoin de la cle");
+      exit(1);
+  }
   // Envoi d'une requete d'identification
   // TO DO (etape 5)
 
@@ -90,8 +94,29 @@ const char* WindowClient::getRecu()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WindowClient::on_pushButtonEnvoyer_clicked()
 {
-  fprintf(stderr,"Clic sur le bouton Envoyer\n");
+    MESSAGE msg;
+    MESSAGE recv;
+
+    fprintf(stderr,"Clic sur le bouton Envoyer\n");
   // TO DO (etapes 2, 3, 4)
+
+    msg.type = getpid();
+    strcpy(msg.texte, getAEnvoyer());
+    msg.expediteur = getpid();
+
+    if (msgsnd(idQ, &msg, sizeof(MESSAGE) - sizeof(long), 0) == -1){
+        perror("Erreur de msgsend");
+        exit(1);
+    }
+
+    if (msgrcv(idQ, &recv, sizeof(MESSAGE)- sizeof(long), getpid(), 0) == -1){
+        perror("Erreur de msgrecv");
+        exit(1);
+    }
+
+    setRecu(recv.texte);
+    
+
 }
 
 void WindowClient::on_pushButtonQuitter_clicked()

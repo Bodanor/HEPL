@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -19,8 +20,10 @@ int main()
 
   // Creation de la file de message
   fprintf(stderr,"(SERVEUR) Creation de la file de messages\n");
-  // TO DO (etape 2)
-
+  if ((idQ = msgget(CLE, IPC_CREAT | IPC_EXCL | 0600)) == -1){
+      perror("Erreur de msgget");
+      exit(1);
+  }
   // Attente de connection de 2 clients
   fprintf(stderr,"(SERVEUR) Attente de connection d'un premier client...\n");
   // TO DO (etape 5)
