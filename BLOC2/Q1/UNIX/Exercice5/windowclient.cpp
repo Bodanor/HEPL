@@ -100,7 +100,7 @@ void WindowClient::on_pushButtonEnvoyer_clicked()
     fprintf(stderr,"Clic sur le bouton Envoyer\n");
   // TO DO (etapes 2, 3, 4)
 
-    msg.type = getpid();
+    msg.type = 1;
     strcpy(msg.texte, getAEnvoyer());
     msg.expediteur = getpid();
 
