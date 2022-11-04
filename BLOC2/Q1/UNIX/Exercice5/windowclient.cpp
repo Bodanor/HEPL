@@ -33,11 +33,18 @@ WindowClient::WindowClient(QWidget *parent):QMainWindow(parent),ui(new Ui::Windo
       perror("Errur de recuperatoin de la cle");
       exit(1);
   }
-  // Envoi d'une requete d'identification
-  // TO DO (etape 5)
 
-  // Armement du signal SIGUSR1
-  // TO DO (etape 4)
+  MESSAGE id;
+
+  id.type = 1;
+  id.expediteur = getpid();
+  strcpy(id.texte, nomClient);
+
+  if (msgsnd(idQ, &id, sizeof(MESSAGE)-sizeof(long), 0) == -1){
+    perror("Impossible de s'identifier au près du serveur !\n");
+    exit(1);
+  }
+
   struct sigaction sigusr1;
   sigusr1.sa_flags = 0;
   sigusr1.sa_handler = handlerSIgUSR1;
@@ -102,10 +109,8 @@ const char* WindowClient::getRecu()
 void WindowClient::on_pushButtonEnvoyer_clicked()
 {
     MESSAGE msg;
-    MESSAGE recv;
 
     fprintf(stderr,"Clic sur le bouton Envoyer\n");
-  // TO DO (etapes 2, 3, 4)
 
     msg.type = 1;
     strcpy(msg.texte, getAEnvoyer());
