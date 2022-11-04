@@ -55,6 +55,8 @@ int main()
     if (msgsnd(idQ, &requete, sizeof(MESSAGE)-sizeof(long),0) == -1){
         perror("Erreur de msgsnd");
     }
+
+    kill(destinataire, SIGUSR1);
   }
 }
 

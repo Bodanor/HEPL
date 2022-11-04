@@ -10,6 +10,7 @@
 #include <signal.h>
 
 extern WindowClient *w;
+void handlerSIgUSR1(int sig);
 
 #include "protocole.h" // contient la cle et la structure d'un message
 
@@ -37,6 +38,12 @@ WindowClient::WindowClient(QWidget *parent):QMainWindow(parent),ui(new Ui::Windo
 
   // Armement du signal SIGUSR1
   // TO DO (etape 4)
+  struct sigaction sigusr1;
+  sigusr1.sa_flags = 0;
+  sigusr1.sa_handler = handlerSIgUSR1;
+  sigemptyset(&sigusr1.sa_mask);
+  sigaction(SIGUSR1, &sigusr1, NULL);
+
 }
 
 WindowClient::~WindowClient()
@@ -109,14 +116,6 @@ void WindowClient::on_pushButtonEnvoyer_clicked()
         exit(1);
     }
 
-    if (msgrcv(idQ, &recv, sizeof(MESSAGE)- sizeof(long), getpid(), 0) == -1){
-        perror("Erreur de msgrecv");
-        exit(1);
-    }
-
-    setRecu(recv.texte);
-    
-
 }
 
 void WindowClient::on_pushButtonQuitter_clicked()
@@ -129,3 +128,17 @@ void WindowClient::on_pushButtonQuitter_clicked()
 ///// Handlers de signaux ////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TO DO (etape 4)
+
+void handlerSIgUSR1(int sig)
+{
+  MESSAGE rcv;
+  printf("Recu du signal SIGUSR1...\n");
+  if (msgrcv(idQ, &rcv, sizeof(MESSAGE) - sizeof(long), getpid(), 0) == -1){
+    perror("Erreur de msgrecv !");
+    exit(1);
+  }
+  else
+    w->setRecu(rcv.texte);
+
+
+}
