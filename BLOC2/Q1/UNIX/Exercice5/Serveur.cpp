@@ -9,6 +9,8 @@
 #include <string.h>
 #include "protocole.h" // contient la cle et la structure d'un message
 
+
+void Handler_SIGINT(int signum);
 int idQ;
 int pid1,pid2;
 
@@ -19,6 +21,13 @@ int main()
 
   // Armement du signal SIGINT
   // TO DO (etape 6)
+  struct sigaction sigint;
+
+  sigint.sa_flags = 0;
+  sigint.sa_handler = Handler_SIGINT;
+  sigemptyset(&sigint.sa_mask);
+  sigaction(SIGINT, &sigint, NULL);
+
   // Creation de la file de message
   // Si la file existe ne pas la recrée
 
@@ -84,4 +93,11 @@ int main()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///// Handlers de signaux ////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TO DO (etape 6)
+void Handler_SIGINT(int signum)
+{
+  fprintf(stderr, "Nettoyage de la file\n");
+  if (msgctl(idQ, IPC_RMID, NULL) != 0){
+    perror("Suppression de file impossible !\n");
+  }
+  exit(1);
+}
