@@ -60,7 +60,7 @@ float Option::getPrix() const
 
 void Option::setPrix(float prix_opt)
 {
-    if (prix >= 0)
+    if (prix_opt >= 0)
         prix = prix_opt;
 }
 
