@@ -12,6 +12,10 @@ class Voiture
 
     friend Voiture operator+(Voiture, Option);
     friend Voiture operator+(Option, Voiture);
+    friend Voiture operator-(Voiture, Option);
+    friend Voiture operator-(Option, Voiture);
+    friend Voiture operator-(Voiture, const string&);
+
 
     private:
         string nom;

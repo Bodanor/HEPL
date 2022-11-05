@@ -27,10 +27,14 @@ Voiture::Voiture(const Voiture &voiture)
     setNom(voiture.getNom());
     setModele(voiture.getModele());
 
-    for (unsigned int i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
+    unsigned int i = 0;
+
+    while (i < (sizeof(options)/sizeof(options[0])))
     {
-        if (voiture.options[i] != NULL)
+        if (voiture.options[i] != NULL){
             AjouteOption(*voiture.options[i]);
+        }
+        i++;
     }
 
 
@@ -104,7 +108,7 @@ void Voiture::AjouteOption(const Option & opt)
 
     while (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL)
         i++;
-    if (i < (sizeof(options)/sizeof(options[0]))){
+    if (i < (sizeof(options)/sizeof(options[0])) && options[i] == NULL){
         options[i] = new Option(opt);
     }
 
@@ -144,13 +148,14 @@ Voiture& Voiture::operator=(const Voiture &source)
 
     for (unsigned int i = 0; i < (sizeof(options)/sizeof(options[0])); i++)
     {
-        if (source.options[i] != NULL){
-            if (options[i] != NULL)
-                delete options[i];
-        options[i] = new Option(*source.options[i]);
-
+        if (options[i] != NULL)
+        {
+            delete options[i];
         }
-
+        if (source.options[i] == NULL)
+            options[i] = NULL;
+        else
+            options[i] = new Option(*source.options[i]);
     }
 
     return (*this);
@@ -160,13 +165,8 @@ Voiture& Voiture::operator=(const Voiture &source)
 Voiture operator+(Voiture src, Option opt)
 {
     Voiture tmp(src);
-    unsigned long i = 0;
-
-    while (i < (sizeof(tmp.options)/sizeof(tmp.options[0])) && tmp.options[i] != NULL)
-        i++;
-    if (i < (sizeof(tmp.options)/sizeof(tmp.options[0]))){
-        tmp.AjouteOption(opt);
-    }
+    
+    tmp.AjouteOption(opt);
 
     return tmp;
 
@@ -175,4 +175,27 @@ Voiture operator+(Voiture src, Option opt)
 Voiture operator+(Option opt, Voiture src)
 {
     return src + opt;
+}
+
+Voiture operator-(Voiture src, Option opt)
+{
+    Voiture tmp(src);
+    tmp.RetireOption(opt.getCode());
+
+    return tmp;
+}
+
+Voiture operator-(Option opt, Voiture src)
+{
+    return src-opt;
+}
+Voiture operator-(Voiture src, const string& opt)
+{
+    Voiture tmp(src);
+   
+    tmp.RetireOption(opt);
+
+    return tmp;
+
+
 }
