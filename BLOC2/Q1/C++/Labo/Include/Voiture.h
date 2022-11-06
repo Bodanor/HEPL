@@ -27,11 +27,8 @@ class Voiture
      * 
      * 
      */
-    friend Voiture operator+(Voiture, Option);
     friend Voiture operator+(Option, Voiture);
-    friend Voiture operator-(Voiture, Option);
     friend Voiture operator-(Option, Voiture);
-    friend Voiture operator-(Voiture, const string&);
 
 
     private:
@@ -57,6 +54,10 @@ class Voiture
         void AjouteOption(const Option &);
         void RetireOption(string code);
         float getPrix();
+        
+        Voiture operator+(Option);
+        Voiture operator-(Option);
+        Voiture operator-(const string&);
 
         
     

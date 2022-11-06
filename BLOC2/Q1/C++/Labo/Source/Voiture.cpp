@@ -162,9 +162,9 @@ Voiture& Voiture::operator=(const Voiture &source)
 
 }
 
-Voiture operator+(Voiture src, Option opt)
+Voiture Voiture::operator+(Option opt)
 {
-    Voiture tmp(src);
+    Voiture tmp(*this);
     
     tmp.AjouteOption(opt);
 
@@ -177,9 +177,9 @@ Voiture operator+(Option opt, Voiture src)
     return src + opt;
 }
 
-Voiture operator-(Voiture src, Option opt)
+Voiture Voiture::operator-(Option opt)
 {
-    Voiture tmp(src);
+    Voiture tmp(*this);
     tmp.RetireOption(opt.getCode());
 
     return tmp;
@@ -189,9 +189,9 @@ Voiture operator-(Option opt, Voiture src)
 {
     return src-opt;
 }
-Voiture operator-(Voiture src, const string& opt)
+Voiture Voiture::operator-(const string& opt)
 {
-    Voiture tmp(src);
+    Voiture tmp(*this);
    
     tmp.RetireOption(opt);
 
