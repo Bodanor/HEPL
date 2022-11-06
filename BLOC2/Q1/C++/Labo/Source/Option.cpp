@@ -84,10 +84,8 @@ void Option::Affiche() const
 
 ostream& operator<<(ostream& s, const Option& opt)
 {
-    s << "Code : " << opt.getCode() << endl;
-    s << "Intitule : " << opt.getIntitule() << endl;
-    s << "Prix : " << opt.getPrix() << endl;
-    
+    opt.Affiche();
+
     return s;
 }
 istream& operator>>(istream& s, Option& opt)
