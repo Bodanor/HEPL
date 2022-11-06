@@ -52,7 +52,7 @@ Voiture::Voiture(string nom, Modele modele_voiture)
 
 }
 
-void Voiture::Affiche()
+void Voiture::Affiche() const
 {
     int nb_options = 0;
 
@@ -70,6 +70,8 @@ void Voiture::Affiche()
     for (unsigned long i = 0; i < (sizeof(options) / sizeof(options[0])); i++)
         if (options[i] != NULL)
             options[i]->Affiche();
+    
+    cout << "Prix total du projet : " << getPrix() << endl;
 }
 
 Voiture::~Voiture()
@@ -127,7 +129,7 @@ void Voiture::RetireOption(string code)
     }
 }
 
-float Voiture::getPrix()
+float Voiture::getPrix() const
 {
     float prix_total = modele.getPrixDeBase();
     
@@ -222,5 +224,12 @@ int Voiture::operator==(Voiture src)
         return 1;
     else
         return 0;
+
+}
+ostream& operator<<(ostream& s, const Voiture& voiture)
+{
+    voiture.Affiche();
+    return s;
+
 
 }

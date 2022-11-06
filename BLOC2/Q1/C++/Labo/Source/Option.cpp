@@ -105,8 +105,4 @@ istream& operator>>(istream& s, Option& opt)
         cout << "Prix invalide !" << endl;
 
     return s;
-
-
-
-
 }

@@ -10,8 +10,8 @@ void Essai3();
 void Essai4();
 void Essai5();
 void Essai6();
-/*void Essai7();
-void Essai8();
+void Essai7();
+/*void Essai8();
 void Essai9();
 */
 int main(int argc,char* argv[])
@@ -32,8 +32,8 @@ int main(int argc,char* argv[])
       case 4 : Essai4(); break;
       case 5 : Essai5(); break;
       case 6 : Essai6(); break;
-      /*case 7 : Essai7(); break;
-      case 8 : Essai8(); break;
+      case 7 : Essai7(); break;
+      /*case 8 : Essai8(); break;
       case 9 : Essai9(); break;
       */
       default : fini = true ; break;
@@ -207,7 +207,7 @@ void Essai6()
 /*******************************************************************************************************/
 /*** Test de l'opérateur << de la classe Voiture *******************************************************/
 /*******************************************************************************************************/
-/*void Essai7()
+void Essai7()
 {
   cout << "**********************************************************************" << endl;
   cout << "(7) ***** Tests de l'opérateur << de Voiture *************************" << endl;
@@ -223,7 +223,7 @@ void Essai6()
   cout << endl << "Voici le projet de Voiture (avec options) :" << endl;
   cout << v << endl;
 }
-*/
+
 
 /*******************************************************************************************************/
 /*** Tests des operateurs de pre/post decrementation de la classe Option *******************************/

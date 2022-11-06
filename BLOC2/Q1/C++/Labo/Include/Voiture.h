@@ -29,7 +29,7 @@ class Voiture
      */
     friend Voiture operator+(Option, Voiture);
     friend Voiture operator-(Option, Voiture);
-
+    friend ostream& operator<<(ostream&, const Voiture&);
 
     private:
         string nom;
@@ -46,14 +46,13 @@ class Voiture
         
         const string getNom()const;
         void setNom(string);
-        void Affiche()const;
+        void Affiche() const;
         void setModele(const Modele &);
         const Modele getModele() const;
-        void Affiche();
 
         void AjouteOption(const Option &);
         void RetireOption(string code);
-        float getPrix();
+        float getPrix() const;
 
         Voiture operator+(Option);
         Voiture operator-(Option);

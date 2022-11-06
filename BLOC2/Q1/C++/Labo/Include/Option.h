@@ -28,8 +28,8 @@ class Option
         void setCode(string);
         void setIntitule(string);
         void setPrix(float);
-        
         void Affiche() const;
+
 
 };
 
