@@ -1,10 +1,17 @@
 #ifndef MODELE_H
 #define MODELE_H
 
+#include <iostream>
+#include <string>
+
+using namespace std;
 enum Moteur { Essence, Diesel, Electrique, Hybride };
 
 class Modele   
 {
+    friend ostream& operator<<(ostream&, const Modele&);
+    friend istream& operator>>(istream&, Modele&);
+
     private : 
         char * nom;
         int puissance;

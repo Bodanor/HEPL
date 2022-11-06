@@ -154,3 +154,30 @@ void Modele::operator=(Modele modele)
     moteur = modele.moteur;
     prix = modele.prix;
 }
+
+ostream& operator<<(ostream& s, const Modele& modele)
+{
+    modele.Affiche();
+
+    return s;
+
+
+}
+istream& operator>>(istream& s, Modele& modele)
+{
+    int moteur;
+
+    cout << "Nom : ";
+    s >> modele.nom;
+    cout << "Moteur : ";
+    s >> moteur;
+    if (moteur >= 0 && moteur <=3)
+        modele.moteur = (Moteur)moteur;
+    cout << "Puissance : ";
+    s >> modele.puissance;
+    cout << "Prix : ";
+    s >> modele.prix;
+
+    return s;
+
+}
