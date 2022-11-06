@@ -54,10 +54,13 @@ class Voiture
         void AjouteOption(const Option &);
         void RetireOption(string code);
         float getPrix();
-        
+
         Voiture operator+(Option);
         Voiture operator-(Option);
         Voiture operator-(const string&);
+        int operator<(Voiture);
+        int operator>(Voiture);
+        int operator==(Voiture);
 
         
     

@@ -7,7 +7,8 @@ int  Menu();
 void Essai1();
 void Essai2();
 void Essai3();
-/*void Essai4();
+void Essai4();
+/*
 void Essai5();
 void Essai6();
 void Essai7();
@@ -29,8 +30,8 @@ int main(int argc,char* argv[])
       case 1 : Essai1(); break;
       case 2 : Essai2(); break;
       case 3 : Essai3(); break;
-      /*case 4 : Essai4(); break;
-      case 5 : Essai5(); break;
+      case 4 : Essai4(); break;
+      /*case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
@@ -148,7 +149,7 @@ void Essai3()
 /*******************************************************************************************************/
 /*** Test des opérateurs < > == de la classe Voiture ***************************************************/
 /*******************************************************************************************************/
-/*void Essai4()
+void Essai4()
 {
   cout << "**********************************************************************" << endl;
   cout << "(4) Tests des opérateurs < > == de Voiture ***************************" << endl;
@@ -172,7 +173,7 @@ void Essai3()
   if (v1 > v2) cout << "Le projet 1 est plus cher" << endl;
   if (v1 == v2) cout << "Les deux projets ont le meme prix" << endl;
 }
-*/
+
 /*******************************************************************************************************/
 /*** Test des opérateurs << et >> de la classe Option **************************************************/
 /*******************************************************************************************************/

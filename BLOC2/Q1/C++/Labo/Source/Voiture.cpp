@@ -196,6 +196,31 @@ Voiture Voiture::operator-(const string& opt)
     tmp.RetireOption(opt);
 
     return tmp;
+}
 
+int Voiture::operator<(Voiture src)
+{
+    if (getPrix() < src.getPrix())
+        return 1;
+    else
+        return 0;
+
+}
+
+int Voiture::operator>(Voiture src)
+{
+    if (getPrix() > src.getPrix())
+        return 1;
+    else
+        return 0;
+
+}
+
+int Voiture::operator==(Voiture src)
+{
+    if (getPrix() == src.getPrix())
+        return 1;
+    else
+        return 0;
 
 }
