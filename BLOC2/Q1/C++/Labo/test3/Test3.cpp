@@ -12,8 +12,8 @@ void Essai5();
 void Essai6();
 void Essai7();
 void Essai8();
-/*void Essai9();
-*/
+void Essai9();
+
 int main(int argc,char* argv[])
 {
   int choix;
@@ -34,8 +34,8 @@ int main(int argc,char* argv[])
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
-      /*case 9 : Essai9(); break;
-      */
+      case 9 : Essai9(); break;
+      
       default : fini = true ; break;
     }
   }
@@ -253,7 +253,7 @@ void Essai8()
 /*******************************************************************************************************/
 /*** Tests de l'opérateur [] de la classe Voiture ******************************************************/
 /*******************************************************************************************************/
-/*void Essai9()
+void Essai9()
 {
   cout << "**********************************************************************" << endl;
   cout << "(9) ***** Tests de l'opérateur [] de Voiture *************************" << endl;
@@ -279,4 +279,4 @@ void Essai8()
     else cout << "---" << endl;
   }
 }
-*/
+

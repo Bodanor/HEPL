@@ -233,3 +233,9 @@ ostream& operator<<(ostream& s, const Voiture& voiture)
 
 
 }
+
+Option* Voiture::operator[](int index)
+{
+    return options[index];
+
+}

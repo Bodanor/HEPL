@@ -60,7 +60,7 @@ class Voiture
         int operator<(Voiture);
         int operator>(Voiture);
         int operator==(Voiture);
-
+        Option* operator[](int);
         
     
 };
