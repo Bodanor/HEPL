@@ -7,6 +7,9 @@
 using namespace std;
 class Option
 {
+    friend ostream& operator<<(ostream&, const Option&);
+    friend istream& operator>>(istream&, Option&);
+
     private:
         string code;
         string intitule;

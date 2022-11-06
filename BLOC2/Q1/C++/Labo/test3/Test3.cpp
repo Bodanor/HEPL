@@ -8,9 +8,8 @@ void Essai1();
 void Essai2();
 void Essai3();
 void Essai4();
-/*
 void Essai5();
-void Essai6();
+/*void Essai6();
 void Essai7();
 void Essai8();
 void Essai9();
@@ -31,8 +30,8 @@ int main(int argc,char* argv[])
       case 2 : Essai2(); break;
       case 3 : Essai3(); break;
       case 4 : Essai4(); break;
-      /*case 5 : Essai5(); break;
-      case 6 : Essai6(); break;
+      case 5 : Essai5(); break;
+      /*case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
       case 9 : Essai9(); break;
@@ -177,7 +176,7 @@ void Essai4()
 /*******************************************************************************************************/
 /*** Test des opérateurs << et >> de la classe Option **************************************************/
 /*******************************************************************************************************/
-/*void Essai5()
+void Essai5()
 {
   cout << "**********************************************************************" << endl;
   cout << "(5) ***** Tests des opérateurs << et >> de Option ********************" << endl;
@@ -188,7 +187,7 @@ void Essai4()
   cout << endl << "Voici l'option que vous avez encodee :" << endl;
   cout << o << endl << endl;
 }
-*/
+
 /*******************************************************************************************************/
 /*** Test des opérateurs << et >> de la classe Modele **************************************************/
 /*******************************************************************************************************/

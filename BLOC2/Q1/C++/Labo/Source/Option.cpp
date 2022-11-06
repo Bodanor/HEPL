@@ -81,3 +81,34 @@ void Option::Affiche() const
     cout << "Prix de l'option : " << prix << endl;
 
 }
+
+ostream& operator<<(ostream& s, const Option& opt)
+{
+    s << "Code : " << opt.getCode() << endl;
+    s << "Intitule : " << opt.getIntitule() << endl;
+    s << "Prix : " << opt.getPrix() << endl;
+    
+    return s;
+}
+istream& operator>>(istream& s, Option& opt)
+{
+    float prix;
+
+
+    cout << "Code : ";
+    s >> opt.code;
+    cout << "Intitule : ";
+    s >> opt.intitule;
+    cout << "Prix : ";
+    s >> prix;
+    if (prix > 0)
+        opt.prix = prix;
+    else
+        cout << "Prix invalide !" << endl;
+
+    return s;
+
+
+
+
+}
