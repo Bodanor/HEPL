@@ -30,6 +30,9 @@ class Option
         void setPrix(float);
         void Affiche() const;
 
+        Option operator--(int);
+        Option operator--();
+
 
 };
 

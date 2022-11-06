@@ -11,8 +11,8 @@ void Essai4();
 void Essai5();
 void Essai6();
 void Essai7();
-/*void Essai8();
-void Essai9();
+void Essai8();
+/*void Essai9();
 */
 int main(int argc,char* argv[])
 {
@@ -33,8 +33,8 @@ int main(int argc,char* argv[])
       case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
-      /*case 8 : Essai8(); break;
-      case 9 : Essai9(); break;
+      case 8 : Essai8(); break;
+      /*case 9 : Essai9(); break;
       */
       default : fini = true ; break;
     }
@@ -228,7 +228,7 @@ void Essai7()
 /*******************************************************************************************************/
 /*** Tests des operateurs de pre/post decrementation de la classe Option *******************************/
 /*******************************************************************************************************/
-/*void Essai8()
+void Essai8()
 {
   cout << "**********************************************************************" << endl;
   cout << "(8.a) ***** Test de l'operateur de pre-decrementation ****************" << endl;
@@ -248,7 +248,7 @@ void Essai7()
   cout << op2-- << endl;        // Si tout va bien, op2 est decremente apres avoir ete affiche !
   cout << "et on reaffiche op2 : " << op2 << endl << endl;
 }
-*/
+
 
 /*******************************************************************************************************/
 /*** Tests de l'opérateur [] de la classe Voiture ******************************************************/

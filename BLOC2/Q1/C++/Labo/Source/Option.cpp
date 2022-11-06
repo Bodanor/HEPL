@@ -106,3 +106,18 @@ istream& operator>>(istream& s, Option& opt)
 
     return s;
 }
+
+Option Option::operator--(int)
+{
+    Option tmp(*this);
+    (*this).prix -= 50;
+
+    return tmp;
+
+}
+
+Option Option::operator--()
+{
+    (*this).prix -= 50;
+    return (*this);
+}
