@@ -2,6 +2,11 @@
 
 Personne::Personne()
 {
+    #ifdef DEBUG
+    cout << "Constructeur par défaut de Personne" << endl;
+
+    #endif
+
     setNom("Sans nom");
     setPrenom("Sans prenom");
 }
@@ -17,6 +22,14 @@ Personne::Personne(const Personne& pers)
     setNom(pers.getNom());
     setPrenom(pers.getPrenom());
 
+}
+
+Personne::~Personne()
+{
+    #ifdef DEBUG
+        cout << "Deconstructeur de Personne" << endl;
+    #endif
+    
 }
 void Personne::setNom(string nom_pers)
 {

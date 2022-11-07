@@ -7,10 +7,10 @@ using namespace std;
 
 int  Menu();
 void Essai1();
-/*void Essai2();
+void Essai2();
 void Essai3();
 void Essai4();
-void Essai5();
+/*void Essai5();
 void Essai6();
 */
 
@@ -26,10 +26,10 @@ int main()
     switch(choix)
     {
       case 1 : Essai1(); break;
-      /*case 2 : Essai2(); break;
+      case 2 : Essai2(); break;
       case 3 : Essai3(); break;
       case 4 : Essai4(); break;
-      case 5 : Essai5(); break;
+      /*case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       */
       default : fini = true ; break;
@@ -103,7 +103,7 @@ void Essai1()
 // A FAIRE : la classe abstraite Intervenant qui h�rite de Personne et qui poss�de un numero (int)
 //           et les deux m�thodes virtuelles pures Tuple() et ToString()
 //           la classe Client qui herite de Intervenant, contenant en plus un numero de gsm (string)
-/*void Essai2()
+void Essai2()
 {
   cout << "----- 2.1 Test du constructeur par defaut ----------------------------------" << endl;
   Client c1;
@@ -151,13 +151,13 @@ void Essai1()
   c3 = c2;
   cout << "--> c3 = " << c3 << endl;
 }
-*/
+
 
 /***********************************************************************************************/
 // A FAIRE : la classe Employe qui herite de Intervenant
 //           contenant en plus une fonction (string), un login (string) et un mot de passe (string)
 //           deux variables statiques constantes VENDEUR et ADMINISTRATIF
-/*void Essai3()
+void Essai3()
 {
   cout << "----- 3.1 Test du constructeur par defaut ----------------------------------" << endl;
   Employe e1;
@@ -216,12 +216,12 @@ void Essai1()
   e3 = e2;
   cout << "--> e3 = " << e3 << endl;
 }
-*/
+
 
 /******************************************************************************************/
 // A FAIRE : normalement rien dans vos classes...
 //           juste comprendre et tester le code ci-dessous
-/*void Essai4()
+void Essai4()
 {
   srand((unsigned)time(NULL));
 
@@ -261,7 +261,7 @@ void Essai1()
   for (int i=0 ; i<10 ; i++) delete intervenants[i];  // Tout se passe-t-il comme vous voulez ?
   // Pour etre plus precis, quid des destructeurs et de la virtualite ?
 }
-*/
+
 /*********************************************************************************************/
 // A FAIRE : normalement rien dans vos classes...
 //           juste comprendre et tester le code ci-dessous

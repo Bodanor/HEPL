@@ -11,7 +11,7 @@ class Personne
     friend ostream& operator<<(ostream&, const Personne &);
     friend istream& operator>>(istream&, Personne&);
 
-    private:
+    protected:
         string nom;
         string prenom;
     
@@ -19,6 +19,7 @@ class Personne
         Personne();
         Personne(const string, const string);
         Personne(const Personne &);
+        ~Personne();
 
         void setNom(string nom);
         void setPrenom(string nom);
