@@ -12,5 +12,6 @@ UNIX_Exercice2: $(CPP_OBJECTS)
 
 
 clean:
-	rm -rf UNIX_Exercice1
+	rm -rf UNIX_Exercice2
 	rm -rf *.o
+	rm -rf clients.dat
