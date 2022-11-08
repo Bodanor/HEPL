@@ -10,9 +10,8 @@ void Essai1();
 void Essai2();
 void Essai3();
 void Essai4();
-/*void Essai5();
+void Essai5();
 void Essai6();
-*/
 
 int main()
 {
@@ -29,9 +28,9 @@ int main()
       case 2 : Essai2(); break;
       case 3 : Essai3(); break;
       case 4 : Essai4(); break;
-      /*case 5 : Essai5(); break;
+      case 5 : Essai5(); break;
       case 6 : Essai6(); break;
-      */
+      
       default : fini = true ; break;
     }
   }
@@ -266,7 +265,7 @@ void Essai4()
 // A FAIRE : normalement rien dans vos classes...
 //           juste comprendre et tester le code ci-dessous
 
-/*void Essai5()
+void Essai5()
 {
   srand((unsigned)time(NULL));
 
@@ -312,10 +311,10 @@ void Essai4()
   cout << "----- 5.3 Liberation memoire ----------------------------------------------------------------------------" << endl;
   for (int i=0 ; i<10 ; i++) delete intervenants[i];
 }
-*/
+
 /******************************************************************************************/
 // A FAIRE : Les deux variables statiques ADMINISTRATIF et VENDEUR (const string) de la classe Employe
-/*void Essai6()
+  void Essai6()
 {
   cout << "Les deux fonctions possibles pour un employe sont :" << endl;
   cout << " - " << Employe::ADMINISTRATIF << endl;
@@ -326,4 +325,4 @@ void Essai4()
   e.setFonction(Employe::VENDEUR);
   cout << e << endl;
 }
-*/
+  

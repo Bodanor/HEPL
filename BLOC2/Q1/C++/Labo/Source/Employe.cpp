@@ -1,5 +1,8 @@
 #include "Employe.h"
 
+string const Employe::ADMINISTRATIF = "Administratif";
+string const Employe::VENDEUR = "Vendeur";
+
 Employe::Employe() : Intervenant()
 {
     #ifdef DEBUG

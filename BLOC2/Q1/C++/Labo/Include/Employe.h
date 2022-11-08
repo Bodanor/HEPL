@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 class Employe : public Intervenant
 {
     private:
@@ -35,6 +36,8 @@ class Employe : public Intervenant
         void ResetMotDePasse();
 
         Employe& operator=(const Employe&);
+        static const string ADMINISTRATIF;
+        static const string VENDEUR;
 
 
 };
