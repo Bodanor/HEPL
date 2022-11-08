@@ -27,8 +27,8 @@ class Voiture
      * 
      * 
      */
-    friend Voiture operator+(Option, Voiture);
-    friend Voiture operator-(Option, Voiture);
+    friend Voiture operator+(const Option&, const Voiture&);
+    friend Voiture operator-(const Option&, const Voiture&);
     friend ostream& operator<<(ostream&, const Voiture&);
 
     private:
@@ -54,13 +54,13 @@ class Voiture
         void RetireOption(string code);
         float getPrix() const;
 
-        Voiture operator+(Option);
-        Voiture operator-(Option);
-        Voiture operator-(const string&);
-        int operator<(Voiture);
-        int operator>(Voiture);
-        int operator==(Voiture);
-        Option* operator[](int);
+        Voiture operator+(Option) const;
+        Voiture operator-(Option) const ;
+        Voiture operator-(const string&) const ;
+        int operator<(const Voiture&) const;
+        int operator>(const Voiture&) const ;
+        int operator==(const Voiture&) const ;
+        Option* operator[](int) const ;
         
     
 };

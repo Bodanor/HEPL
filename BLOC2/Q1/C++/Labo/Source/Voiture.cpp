@@ -164,7 +164,7 @@ Voiture& Voiture::operator=(const Voiture &source)
 
 }
 
-Voiture Voiture::operator+(Option opt)
+Voiture Voiture::operator+(Option opt) const 
 {
     Voiture tmp(*this);
     
@@ -174,12 +174,12 @@ Voiture Voiture::operator+(Option opt)
 
 }
 
-Voiture operator+(Option opt, Voiture src)
+Voiture operator+(const Option& opt, const Voiture& src)
 {
     return src + opt;
 }
 
-Voiture Voiture::operator-(Option opt)
+Voiture Voiture::operator-(Option opt) const
 {
     Voiture tmp(*this);
     tmp.RetireOption(opt.getCode());
@@ -187,11 +187,11 @@ Voiture Voiture::operator-(Option opt)
     return tmp;
 }
 
-Voiture operator-(Option opt, Voiture src)
+Voiture operator-(const Option& opt, const Voiture& src)
 {
     return src-opt;
 }
-Voiture Voiture::operator-(const string& opt)
+Voiture Voiture::operator-(const string& opt) const
 {
     Voiture tmp(*this);
    
@@ -200,7 +200,7 @@ Voiture Voiture::operator-(const string& opt)
     return tmp;
 }
 
-int Voiture::operator<(Voiture src)
+int Voiture::operator<(const Voiture& src) const
 {
     if (getPrix() < src.getPrix())
         return 1;
@@ -209,7 +209,7 @@ int Voiture::operator<(Voiture src)
 
 }
 
-int Voiture::operator>(Voiture src)
+int Voiture::operator>(const Voiture& src) const
 {
     if (getPrix() > src.getPrix())
         return 1;
@@ -218,7 +218,7 @@ int Voiture::operator>(Voiture src)
 
 }
 
-int Voiture::operator==(Voiture src)
+int Voiture::operator==(const Voiture& src) const
 {
     if (getPrix() == src.getPrix())
         return 1;
@@ -234,7 +234,7 @@ ostream& operator<<(ostream& s, const Voiture& voiture)
 
 }
 
-Option* Voiture::operator[](int index)
+Option* Voiture::operator[](int index) const
 {
     return options[index];
 

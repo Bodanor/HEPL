@@ -157,7 +157,30 @@ void Modele::operator=(Modele modele)
 
 ostream& operator<<(ostream& s, const Modele& modele)
 {
-    modele.Affiche();
+    s << "Nom : "<<modele.nom << endl;
+    s << "Puissance : "<< modele.puissance << endl;
+    s << "Moteur : ";
+
+    switch (modele.moteur)
+    {
+    case Essence : 
+        s <<"Essence ";
+        break;
+    case Diesel:
+        s <<"Diesel ";
+        break;
+    case Electrique:
+        s << "Electrique ";
+        break;
+    case Hybride:
+        s << "Hybride ";
+        break;
+    default:
+        s << "Inconnu ";
+        break;
+    }
+    s << endl;
+    s << "Prix : " << modele.prix << "Euros" << endl;
 
     return s;
 

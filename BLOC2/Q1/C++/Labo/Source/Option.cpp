@@ -84,7 +84,9 @@ void Option::Affiche() const
 
 ostream& operator<<(ostream& s, const Option& opt)
 {
-    opt.Affiche();
+    s << "Code : " << opt.code << endl;
+    s << "Intitule : " << opt.intitule << endl;
+    s << "Prix de l'option : " << opt.prix << endl;
 
     return s;
 }
@@ -94,9 +96,9 @@ istream& operator>>(istream& s, Option& opt)
 
 
     cout << "Code : ";
-    s >> opt.code;
+    getline(s, opt.code);
     cout << "Intitule : ";
-    s >> opt.intitule;
+    getline(s, opt.intitule);
     cout << "Prix : ";
     s >> prix;
     if (prix > 0)
@@ -107,17 +109,17 @@ istream& operator>>(istream& s, Option& opt)
     return s;
 }
 
-Option Option::operator--(int)
+Option Option::operator--(int) 
 {
     Option tmp(*this);
-    (*this).prix -= 50;
+    prix -= 50;
 
     return tmp;
 
 }
 
-Option Option::operator--()
+Option Option::operator--() 
 {
-    (*this).prix -= 50;
+    prix -= 50;
     return (*this);
 }
