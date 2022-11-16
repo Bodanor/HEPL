@@ -20,9 +20,9 @@ Option::Option(string code_opt, string intitule_opt, float prix_opt)
         cout << "Constructeur par initialisation d'Option" << endl;
     #endif
     
-    code = code_opt;
-    intitule = intitule_opt;
-    prix = prix_opt;
+    setCode(code_opt);
+    setIntitule(intitule_opt);
+    setPrix(prix_opt);
 }
 
 Option::Option(const Option &opt)
@@ -62,15 +62,25 @@ void Option::setPrix(float prix_opt)
 {
     if (prix_opt >= 0)
         prix = prix_opt;
+    else
+        throw(OptionException("Le prix doit être positif !"));
 }
 
 void Option::setIntitule(string intitule_opt)
 {
-    intitule = intitule_opt;
+    if (intitule_opt == "")
+        throw(OptionException("L'intitule est vide !"));
+    else
+        intitule = intitule_opt;
 }
 
 void Option::setCode(string code_opt)
 {
+    if (code_opt == "")
+        throw(OptionException("Code vide !"));
+    
+    if (code_opt.length() > 4)
+        throw(OptionException("Code fait plus de 4 carcatères !"));
     code = code_opt;
 }
 
@@ -93,26 +103,33 @@ ostream& operator<<(ostream& s, const Option& opt)
 istream& operator>>(istream& s, Option& opt)
 {
     float prix;
-
+    string tmp;
 
     cout << "Code : ";
-    getline(s, opt.code);
+    getline(s, tmp);
+    opt.setCode(tmp);
     cout << "Intitule : ";
-    getline(s, opt.intitule);
+    getline(s, tmp);
+    opt.setIntitule(tmp);
     cout << "Prix : ";
     s >> prix;
-    if (prix > 0)
-        opt.prix = prix;
-    else
-        cout << "Prix invalide !" << endl;
+    opt.setPrix(prix);
+
+    s.ignore();
 
     return s;
 }
 
+void Option::operator=(Option opt)
+{
+    code = opt.getCode();
+    intitule = opt.getIntitule();
+    prix = opt.getPrix();
+}
 Option Option::operator--(int) 
 {
     Option tmp(*this);
-    prix -= 50;
+    setPrix(prix - 50);
 
     return tmp;
 
@@ -120,6 +137,6 @@ Option Option::operator--(int)
 
 Option Option::operator--() 
 {
-    prix -= 50;
+    setPrix(prix - 50);
     return (*this);
 }

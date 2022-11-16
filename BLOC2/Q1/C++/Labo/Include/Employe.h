@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Intervenant.h"
+#include "PasswordException.h"
 
 using namespace std;
 
@@ -38,7 +39,10 @@ class Employe : public Intervenant
         Employe& operator=(const Employe&);
         static const string ADMINISTRATIF;
         static const string VENDEUR;
-
+        static const int INVALID_LENGHT;
+        static const int ALPHA_MISSING;
+        static const int DIGIT_MISSING;
+        static const int NO_PASSWORD;
 
 };
 #endif

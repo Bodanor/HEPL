@@ -15,6 +15,10 @@ Intervenant::Intervenant(const string nom_pers, const string prenom_pers, int nu
     setNumero(num_pers);
 }
 
+Intervenant::Intervenant(const Intervenant & src) : Personne(src)
+{
+    setNumero(src.getNumero());
+}
 Intervenant::~Intervenant()
 {
     #ifdef DEBUG

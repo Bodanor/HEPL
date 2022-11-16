@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "OptionException.h"
+
 using namespace std;
 class Option
 {
@@ -32,6 +34,8 @@ class Option
 
         Option operator--(int);
         Option operator--();
+
+        void operator=(Option opt);
 
 
 };

@@ -109,7 +109,14 @@ void Voiture::AjouteOption(const Option & opt)
     unsigned long i = 0;
 
     while (i < (sizeof(options)/sizeof(options[0])) && options[i] != NULL)
+    {
+        if (opt.getCode() == options[i]->getCode())
+            throw(OptionException("L'option existe déja !"));
         i++;
+    }
+    if (i == (sizeof(options)/sizeof(options[0])))
+        throw(OptionException("Impossible d'ajouter plus de 5 options !"));
+
     if (i < (sizeof(options)/sizeof(options[0])) && options[i] == NULL){
         options[i] = new Option(opt);
     }
@@ -127,6 +134,8 @@ void Voiture::RetireOption(string code)
         delete options[i];
         options[i] = NULL;
     }
+    else
+        throw(OptionException("L'option n'existe pas !"));
 }
 
 float Voiture::getPrix() const

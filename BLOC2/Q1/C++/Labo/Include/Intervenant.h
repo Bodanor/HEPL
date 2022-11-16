@@ -17,6 +17,7 @@ class Intervenant : public Personne
         Intervenant();
         virtual ~Intervenant();
         Intervenant(const string, const string, int);
+        Intervenant(const Intervenant &);
         void setNumero(int);
         int getNumero() const;
         virtual string ToString() const = 0;
