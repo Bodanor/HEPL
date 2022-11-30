@@ -60,7 +60,8 @@ void Personne::Affiche() const
 
 ostream& operator<<(ostream& s, const Personne& pers)
 {
-    pers.Affiche();
+    s << "Nom : " << pers.getNom() << endl;
+    s << "Prenom : " << pers.getPrenom() << endl;
     return s;
 }
 

@@ -138,6 +138,8 @@ void Employe::ResetMotDePasse()
 
 Employe& Employe::operator=(const Employe& src)
 {
+    setNom(src.getNom());
+    setPrenom(src.getPrenom());
     setLogin(src.getLogin());
     if (src.getMotDePasse() != "")
         setMotDePasse(src.getMotDePasse());
