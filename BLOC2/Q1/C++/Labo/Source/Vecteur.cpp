@@ -29,7 +29,7 @@ template <class T> Vecteur<T>::Vecteur(const Vecteur &vec)
 
 template <class T> Vecteur<T>::~Vecteur(void)
 {
-    delete v;
+    delete []v;
 }
 
 template <class T> int Vecteur<T>::size() const
@@ -79,7 +79,7 @@ template <class T> Vecteur<T> & Vecteur<T>::operator=(const Vecteur & vec)
 
     v = new T[vec._sizeMax];
 
-    for (int i = 0; i < vec._sizeMax; i++)
+    for (int i = 0; i < vec._size; i++)
         *(v + i) = *(vec.v + i);
     
     return (*this);
