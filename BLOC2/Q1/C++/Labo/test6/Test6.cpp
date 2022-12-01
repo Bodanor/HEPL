@@ -2,20 +2,20 @@
 using namespace std;
 
 #include "Vecteur.h"
-#include "Iterateur.h"
+//#include "Iterateur.h"
 #include "Client.h"
-#include "VecteurTrie.h"
+//#include "VecteurTrie.h"
 
 int  Menu();
 void Essai1();
 void Essai2();
-void Essai3();
+/*void Essai3();
 void Essai4();
 void Essai5();
 void Essai6();
 void Essai7();
 void Essai8();
-
+*/
 int main(int argc,char* argv[])
 {
   int choix;
@@ -29,12 +29,13 @@ int main(int argc,char* argv[])
     {
       case 1 : Essai1(); break;
       case 2 : Essai2(); break;
-      case 3 : Essai3(); break;
+      /*case 3 : Essai3(); break;
       case 4 : Essai4(); break;
       case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
+      */
       default : fini = true ; break;
     }
   }
@@ -160,7 +161,8 @@ void Essai2()
 }
 
 /*******************************************************************************************************/
-void Essai3()
+
+/*void Essai3()
 {
   cout << "----- 3. Test de l'iterateur avec un vecteur d'entiers ------------------------" << endl;
   cout << "Creation  d'un vecteur..." << endl;
@@ -188,9 +190,9 @@ void Essai3()
     it++;
   }
 }
-
+*/
 /*******************************************************************************************************/
-void Essai4()
+/*void Essai4()
 {
   cout << "----- 4. Test de l'iterateur avec un Vecteur de Clients ---------------------" << endl;
   cout << "Creation  d'un vecteur..." << endl;
@@ -221,9 +223,9 @@ void Essai4()
     it++;
   }
 }
-
+*/
 /*******************************************************************************************************/
-void Essai5()
+/*void Essai5()
 {
   cout << "----- 5. Test du template Vecteur avec des entiers ------------------------------------------" << endl;
   cout << "----- 5.1 Creation et gestion d'un Vecteur --------------------------------------------------" << endl;
@@ -251,9 +253,10 @@ void Essai5()
   cout << "On retire l'element d'indice 3 (3) : " << vec.retire(3) << endl;
   vec.Affiche();
 }
-
+*/
 /*******************************************************************************************************/
-void Essai6()
+
+/*void Essai6()
 {
   cout << "----- 6. Test du template VecteurTrie avec des objets de la classe Client ---------------" << endl;
   cout << "Creation  d'un vecteur trie..." << endl;
@@ -272,9 +275,10 @@ void Essai6()
   cout << "Le vecteur contient " << vec.size() << " elements." << endl;
   cout << endl;
 }
-
+*/
 /*******************************************************************************************************/
-void Essai7()
+
+/*void Essai7()
 {
   cout << "----- 7. Test de l'iterateur avec un VecteurTrie d'entiers ------------------------" << endl;
   cout << "Creation  d'un vecteur trie..." << endl;
@@ -302,9 +306,9 @@ void Essai7()
     it++;
   }
 }
-
+*/
 /*******************************************************************************************************/
-void Essai8()
+/*void Essai8()
 {
   cout << "----- 8. Test de l'iterateur avec un VecteurTrie de Clients ---------------------" << endl;
   cout << "Creation  d'un vecteur..." << endl;
@@ -335,3 +339,4 @@ void Essai8()
     it++;
   }
 }
+*/
