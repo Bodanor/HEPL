@@ -28,7 +28,34 @@ Client::~Client()
     #endif
 }
 
+int Client::cmpClient(const Client& src)
+{
+    if (nom < src.nom)
+        return -1;
+    if (nom > src.nom)
+        return 1;
+    if (prenom < src.prenom)
+        return -1;
+    if (prenom > src.prenom)
+        return 1;
+    else
+        return 0;
+}
 
+int Client::operator<(const Client & src)
+{
+    return cmpClient(src) == -1;
+}
+
+int Client::operator>(const Client & src)
+{
+    return cmpClient(src) == 1;
+}
+
+int Client::operator==(const Client & src)
+{
+    return cmpClient(src) == 0;
+}
 
 int Client::getNumero() const
 {

@@ -28,4 +28,4 @@ template <class T> void VecteurTrie<T>::insere(const T& src)
 }
 
 template class VecteurTrie<int>;
-//template class VecteurTrie<Client>;
+template class VecteurTrie<Client>;

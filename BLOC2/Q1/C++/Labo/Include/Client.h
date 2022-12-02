@@ -9,6 +9,7 @@ class Client : public Intervenant
 {
     private:
         string gsm;
+        int cmpClient(const Client &);
     
     public:
         Client();
@@ -24,6 +25,9 @@ class Client : public Intervenant
         string getGsm() const;
 
         Client& operator=(const Client&);
+        int operator<(const Client&);
+        int operator==(const Client&);
+        int operator>(const Client&);
 
 };
 
