@@ -4,7 +4,10 @@
 #include <iostream>
 #include "Client.h"
 
+
 using namespace std;
+
+template <class T> class Iterateur;
 
 template <class T> class Vecteur
 {
@@ -26,6 +29,8 @@ template <class T> class Vecteur
 
         Vecteur& operator=(const Vecteur&);
         T& operator[](int) const;
+
+        friend class Iterateur<T>;
 };
 
 #endif

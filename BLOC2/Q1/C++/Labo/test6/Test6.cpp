@@ -2,16 +2,16 @@
 using namespace std;
 
 #include "Vecteur.h"
-//#include "Iterateur.h"
+#include "Iterateur.h"
 #include "Client.h"
 //#include "VecteurTrie.h"
 
 int  Menu();
 void Essai1();
 void Essai2();
-/*void Essai3();
+void Essai3();
 void Essai4();
-void Essai5();
+/*void Essai5();
 void Essai6();
 void Essai7();
 void Essai8();
@@ -29,9 +29,9 @@ int main(int argc,char* argv[])
     {
       case 1 : Essai1(); break;
       case 2 : Essai2(); break;
-      /*case 3 : Essai3(); break;
+      case 3 : Essai3(); break;
       case 4 : Essai4(); break;
-      case 5 : Essai5(); break;
+      /*case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
@@ -162,7 +162,7 @@ void Essai2()
 
 /*******************************************************************************************************/
 
-/*void Essai3()
+void Essai3()
 {
   cout << "----- 3. Test de l'iterateur avec un vecteur d'entiers ------------------------" << endl;
   cout << "Creation  d'un vecteur..." << endl;
@@ -190,9 +190,9 @@ void Essai2()
     it++;
   }
 }
-*/
+
 /*******************************************************************************************************/
-/*void Essai4()
+void Essai4()
 {
   cout << "----- 4. Test de l'iterateur avec un Vecteur de Clients ---------------------" << endl;
   cout << "Creation  d'un vecteur..." << endl;
@@ -223,7 +223,7 @@ void Essai2()
     it++;
   }
 }
-*/
+
 /*******************************************************************************************************/
 /*void Essai5()
 {
