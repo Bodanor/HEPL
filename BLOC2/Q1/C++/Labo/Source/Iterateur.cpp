@@ -5,6 +5,10 @@ template <class T> Iterateur<T>::Iterateur(Vecteur<T>& src) : vec(src), v(src.v)
 
 };
 
+template <class T> Iterateur<T>::~Iterateur()
+{
+
+}
 template <class T> void Iterateur<T>::reset(void)
 {
     v = vec.v;

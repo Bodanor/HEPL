@@ -14,6 +14,7 @@ template <class T> class Iterateur
 
     public:
         Iterateur(Vecteur<T>&);
+        ~Iterateur();
         void reset(void);
         bool end(void);
         bool operator++();
