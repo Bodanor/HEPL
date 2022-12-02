@@ -4,15 +4,15 @@ using namespace std;
 #include "Vecteur.h"
 #include "Iterateur.h"
 #include "Client.h"
-//#include "VecteurTrie.h"
+#include "VecteurTrie.h"
 
 int  Menu();
 void Essai1();
 void Essai2();
 void Essai3();
 void Essai4();
-/*void Essai5();
-void Essai6();
+void Essai5();
+/*void Essai6();
 void Essai7();
 void Essai8();
 */
@@ -31,8 +31,8 @@ int main(int argc,char* argv[])
       case 2 : Essai2(); break;
       case 3 : Essai3(); break;
       case 4 : Essai4(); break;
-      /*case 5 : Essai5(); break;
-      case 6 : Essai6(); break;
+      case 5 : Essai5(); break;
+      /*case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
       */
@@ -225,7 +225,7 @@ void Essai4()
 }
 
 /*******************************************************************************************************/
-/*void Essai5()
+void Essai5()
 {
   cout << "----- 5. Test du template Vecteur avec des entiers ------------------------------------------" << endl;
   cout << "----- 5.1 Creation et gestion d'un Vecteur --------------------------------------------------" << endl;
@@ -253,7 +253,7 @@ void Essai4()
   cout << "On retire l'element d'indice 3 (3) : " << vec.retire(3) << endl;
   vec.Affiche();
 }
-*/
+
 /*******************************************************************************************************/
 
 /*void Essai6()
