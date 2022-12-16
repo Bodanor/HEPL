@@ -9,7 +9,7 @@ using namespace std;
 int  Menu();
 void Essai1();
 void Essai2();
-void Essai3();
+ void Essai3();
 
 int main()
 {
@@ -23,8 +23,8 @@ int main()
     switch(choix)
     {
       case 1 : Essai1(); break;
-      case 2 : Essai2(); break;
-      case 3 : Essai3(); break;
+       case 2 : Essai2(); break;
+       case 3 : Essai3(); break;
       default : fini = true ; break; 
     }
   }

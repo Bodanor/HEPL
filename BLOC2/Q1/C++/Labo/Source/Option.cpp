@@ -140,3 +140,47 @@ Option Option::operator--()
     setPrix(prix - 50);
     return (*this);
 }
+
+void Option::Save(ostream &fichier) const
+{
+	int size_tmp;
+
+	if (!fichier)
+		cout << "Impossible de sauvegarder l'option !" << endl;
+
+	else {
+		size_tmp = code.size();
+		fichier.write((char*)&size_tmp, sizeof(size_tmp));
+		fichier.write((char*)code.data(), size_tmp*sizeof(char));
+
+        size_tmp = intitule.size();
+		fichier.write((char*)&size_tmp, sizeof(size_tmp));
+		fichier.write((char*)intitule.data(), size_tmp*sizeof(char));
+
+		fichier.write((char*)&prix, sizeof(prix));
+	}
+}
+
+void Option::Load(istream &fichier)
+{
+	int size_tmp;
+
+	if (!fichier)
+		cout << "Impossible de lire l'option !" << endl;
+
+	else {
+		fichier.read((char*)&size_tmp, sizeof(size_tmp));
+		code.resize(size_tmp);
+		fichier.read((char*)code.data(), size_tmp*sizeof(char));
+		code.append("\0");
+		
+		fichier.read((char*)&size_tmp, sizeof(size_tmp));
+		intitule.resize(size_tmp);
+		fichier.read((char*)intitule.data(), size_tmp*sizeof(char));
+		intitule.append("\0");
+
+		fichier.read((char*)&prix, sizeof(prix)); 
+	}
+	
+
+}

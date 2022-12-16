@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 enum Moteur { Essence, Diesel, Electrique, Hybride };
@@ -34,7 +35,8 @@ class Modele
         void setPuissance(int);
         void setMoteur(Moteur);
         void setPrixDeBase(float);
-        
+		void Save(ostream &fichier) const;
+		void Load(istream &fichier);
         void Affiche()const;//Ne modfifie pas les variables membres
 };
 

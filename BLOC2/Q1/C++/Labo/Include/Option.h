@@ -34,7 +34,8 @@ class Option
 
         Option operator--(int);
         Option operator--();
-
+		void Save (ostream & fichier) const;
+		void Load(istream & fichier);
         void operator=(Option opt);
 
 

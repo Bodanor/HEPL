@@ -2,6 +2,8 @@
 #define VOITURE_H
 
 #include <string>
+#include <fstream>
+
 #include "Modele.h"
 #include "Option.h"
 
@@ -61,7 +63,8 @@ class Voiture
         int operator>(const Voiture&) const ;
         int operator==(const Voiture&) const ;
         Option* operator[](int) const ;
-        
+		void Save() const;
+		void Load(string nomFichier);
     
 };
 #endif
