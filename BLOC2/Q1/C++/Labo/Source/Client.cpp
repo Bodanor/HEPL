@@ -7,7 +7,6 @@ Client::Client() : Intervenant()
     cout << "Constructeur par défaut de Client" << endl;
 
     #endif
-    setNumero(0);
     setGsm("");
 }
 
@@ -73,11 +72,6 @@ void Client::setGsm(string num_gsm)
     gsm = num_gsm;
 }
 
-void Client::setNumero(int num_client)
-{
-    numero = num_client;
-}
-
 Client & Client::operator=(const Client& src)
 {
     setPrenom(src.getPrenom());
@@ -103,4 +97,13 @@ string Client::Tuple() const
     tmp += getNom() + ';'  + getPrenom() + ';';
     tmp += getGsm();
     return tmp;
+}
+
+ostream& operator<<(ostream& s, const Client& pers)
+{
+    s << "Nom : " << pers.getNom() << endl;
+    s << "Prenom : " << pers.getPrenom() << endl;
+    s << "Numero : " << pers.getNumero() << endl;
+    s << "GSM : " << pers.getGsm() << endl;
+    return s;
 }

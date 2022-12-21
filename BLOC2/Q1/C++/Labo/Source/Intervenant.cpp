@@ -1,5 +1,7 @@
 #include "Intervenant.h"
 
+int Intervenant::numCourant = 1;
+
 Intervenant::Intervenant() : Personne()
 {
     #ifdef DEBUG
@@ -37,3 +39,4 @@ int Intervenant::getNumero() const
 {
     return numero;
 }
+

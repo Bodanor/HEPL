@@ -146,6 +146,18 @@ Employe& Employe::operator=(const Employe& src)
     else
         motDePasse = NULL;
     setFonction(src.getFonction());
+    setNumero(src.getNumero());
 
     return (*this);
+}
+
+ostream& operator<<(ostream& s, const Employe& pers)
+{
+    s << "Nom : " << pers.getNom() << endl;
+    s << "Prenom : " << pers.getPrenom() << endl;
+    s << "Numero : " << pers.getNumero() << endl;
+    if (pers.getMotDePasse() != "")
+        s << "MDP : " << pers.getMotDePasse() << endl;
+    s << "FONCTION : " << pers.getFonction() << endl;
+    return s;
 }

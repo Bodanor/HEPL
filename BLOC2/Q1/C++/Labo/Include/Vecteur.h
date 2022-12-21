@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include "Client.h"
-
+#include "Option.h"
+#include "Modele.h"
+#include "Employe.h"
 
 using namespace std;
 
 template <class T> class Iterateur;
-
 template <class T> class Vecteur
 {
     protected:

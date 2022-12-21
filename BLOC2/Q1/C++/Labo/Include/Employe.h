@@ -12,6 +12,8 @@ using namespace std;
 
 class Employe : public Intervenant
 {
+
+    friend ostream& operator<<(ostream&, const Employe &);
     private:
         string login;
         string *motDePasse;

@@ -7,7 +7,7 @@ int main()
 {
   // Creation du Garage
   Garage g;
-
+  
   // Ajout de modeles disponibles
   cout << "//***** Modeles disponibles ***********************" << endl;
   g.ajouteModele(Modele("208 Active 1.5 BlueHDi 5P",100,Diesel,21800.0f));

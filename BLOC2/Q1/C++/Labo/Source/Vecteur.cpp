@@ -73,10 +73,10 @@ template <class T> T Vecteur<T>::retire(const int index)
 
 template <class T> Vecteur<T> & Vecteur<T>::operator=(const Vecteur & vec)
 {
-    delete v;
     _size = vec._size;
     _sizeMax = vec._sizeMax;
-
+    if (v != NULL)
+        delete [] v ;
     v = new T[vec._sizeMax];
 
     for (int i = 0; i < vec._size; i++)
@@ -96,3 +96,6 @@ template <class T> T& Vecteur<T>::operator[](int i) const
 
 template class Vecteur<int>;
 template class Vecteur<Client>;
+template class Vecteur<Employe>;
+template class Vecteur<Modele>;
+template class Vecteur<Option>;

@@ -23,7 +23,7 @@ class Intervenant : public Personne
         virtual string ToString() const = 0;
         virtual string Tuple() const = 0;
 
-    
+    static int numCourant;
 };
 
 #endif

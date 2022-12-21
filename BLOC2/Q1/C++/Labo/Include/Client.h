@@ -2,11 +2,13 @@
 #define __CLIENT_H__
 #include <iostream>
 #include <string>
+#include "Vecteur.h"
 
 #include "Intervenant.h"
 
 class Client : public Intervenant
 {
+    friend ostream& operator<<(ostream&, const Client &);
     private:
         string gsm;
         int cmpClient(const Client &);
@@ -19,7 +21,7 @@ class Client : public Intervenant
 
         string ToString() const;
         string Tuple() const;
-        void setNumero(int);
+
         void setGsm(string);
         int getNumero() const;
         string getGsm() const;
