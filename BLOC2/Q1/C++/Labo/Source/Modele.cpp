@@ -207,32 +207,37 @@ istream& operator>>(istream& s, Modele& modele)
 void Modele::Save(ostream &fichier) const
 {
 	int size_nom = strlen(nom);
+    
 	if (!fichier)
 		cout << "Impossible de sauvegarder le fichier !"<< endl;
 	else {
+       
 		fichier.write((char*)&size_nom, sizeof(int));
-		fichier.write(nom, strlen(nom));
+		fichier.write(nom, strlen(nom)*sizeof(char));
 		fichier.write((char*)&puissance, sizeof(puissance));
 		fichier.write((char*)&moteur, sizeof(moteur));
 		fichier.write((char*)&prix, sizeof(prix));
 	}
+    
 }
 
 void Modele::Load(istream &fichier)
 {
 	int size_nom;
-	
+   
+
 	if (!fichier)
 		cout << "Impossible de lire le fichier !"<<endl;
 	else {
+        
 		fichier.read((char*)&size_nom, sizeof(int));
 		nom = new char [size_nom + 1];
-		fichier.read((char*)nom, size_nom);
-		nom[size_nom + 1] = '\0';
+		fichier.read((char*)nom, size_nom*sizeof(char));
+		nom[size_nom] = '\0';
 		fichier.read((char*)&puissance, sizeof(puissance));
 		fichier.read((char*)&moteur, sizeof(moteur));
 		fichier.read((char*)&prix, sizeof(prix));
 		
 	}
-
+   
 }

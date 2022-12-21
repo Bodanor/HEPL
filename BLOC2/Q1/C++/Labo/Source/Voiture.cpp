@@ -254,7 +254,7 @@ void Voiture::Save() const
 {
 	string nom_fichier = nom;
 	int size_tmp;
-	
+
 	nom_fichier.append(".car");
 
 	ofstream fichier(nom_fichier, ios::out);
@@ -262,40 +262,48 @@ void Voiture::Save() const
 	if (!fichier)
 		cout << "Impossible d'enregistrer le projet !" << endl;
 	else {
+        
 		size_tmp = nom.size();
 		fichier.write((char*)&size_tmp, sizeof(size_tmp));
 		fichier.write((char*)nom.data(), size_tmp*sizeof(char));
 
 		modele.Save(fichier);
+
+
 		for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++) {
 			if (options[i] != NULL) {
 				options[i]->Save(fichier);
 			}
 		}
 	}
+
+    
+	fichier.close();
 }
 
 void Voiture::Load(string nomFichier)
 {
 	int size_tmp;
 	Option tmp;
-	
 	ifstream fichier (nomFichier, ios::in);
 
-	if (!fichier)
+	if (!fichier.rdbuf()->is_open() )
 		cout << "Impossible de lire le fichier !" << endl;
 
 	else {
-		fichier.read((char*)&size_tmp, sizeof(int));
-		nom.resize(size_tmp + 1);
+        
+		fichier.read((char*)&size_tmp, sizeof(size_tmp));
+		nom.resize(size_tmp);
 		fichier.read((char*)nom.data(), size_tmp*sizeof(char));
 		nom.append("\0");
 
 		modele.Load(fichier);
-
-		while (!fichier.eof()) {
-			tmp.Load(fichier);
+        
+		while (fichier.peek() != EOF) {
+            tmp.Load(fichier);
 			AjouteOption(tmp);
+            
 		}
 	}
+	fichier.close();
 }
