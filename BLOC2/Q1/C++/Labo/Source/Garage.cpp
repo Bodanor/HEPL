@@ -1,5 +1,7 @@
 #include "Garage.h"
 
+Garage Garage::instance;
+Voiture Garage::projetEnCours;
 
 Garage::Garage()
 {
@@ -7,7 +9,13 @@ Garage::Garage()
 	cout << "Contructeur par default de GARAGE" << endl;
 	#endif
 }
+Garage::~Garage()
+{
+	#ifdef DEBUG
+	cout << "Destructeur de GARAGE" << endl;
+	#endif
 
+}
 void Garage::ajouteModele(const Modele &m)
 {
 	modeles.insere(m);
@@ -89,5 +97,21 @@ void Garage::supprimeEmployeParNumero(int num)
 			employes.retire(i);
 		}
 	}
+
+}
+
+Garage& Garage::getInstance()
+{
+	return instance;
+}
+
+Voiture& Garage::getProjetEnCours()
+{
+	return projetEnCours;
+}
+
+void Garage::resetProjetEnCours()
+{
+	projetEnCours = Voiture();
 
 }
