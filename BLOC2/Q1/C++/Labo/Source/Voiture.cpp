@@ -254,6 +254,7 @@ void Voiture::Save() const
 {
 	string nom_fichier = nom;
 	int size_tmp;
+	int nb_options;
 
 	nom_fichier.append(".car");
 
@@ -269,7 +270,15 @@ void Voiture::Save() const
 
 		modele.Save(fichier);
 
-
+		// Rajouter le nombres d'options
+		nb_options = 0;
+		for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++) {
+			if (options[i] != NULL) {
+				nb_options++;
+			}
+		}
+		fichier.write((char*)&nb_options, sizeof(nb_options));
+		
 		for (unsigned long i = 0; i < (sizeof(options)/sizeof(options[0])); i++) {
 			if (options[i] != NULL) {
 				options[i]->Save(fichier);
@@ -284,6 +293,7 @@ void Voiture::Save() const
 void Voiture::Load(string nomFichier)
 {
 	int size_tmp;
+	int nb_options = 0;
 	Option tmp;
 	ifstream fichier (nomFichier, ios::in);
 
@@ -298,12 +308,20 @@ void Voiture::Load(string nomFichier)
 		nom.append("\0");
 
 		modele.Load(fichier);
-        
-		while (fichier.peek() != EOF) {
-            tmp.Load(fichier);
+        // Chargement du nombre d'options et suppression des options déja existantes
+		for (unsigned int i = 0; i < (sizeof(options)/sizeof(options[0])); i++) {
+			if (options[i] != NULL) {
+				delete options[i];
+			}
+		}
+
+		fichier.read((char*)&nb_options, sizeof(nb_options));
+
+		for (int i = 0; i < nb_options; i++) {
+			tmp.Load(fichier);
 			AjouteOption(tmp);
-            
 		}
 	}
 	fichier.close();
 }
+
