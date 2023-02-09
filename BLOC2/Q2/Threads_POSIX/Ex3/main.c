@@ -123,7 +123,7 @@ void ThreadFunc3(void)
 
 void sigHandlerSig(int sig)
 {
-	printf("Thread secondaire, id %u: réception du signal %d\n", (unsigned int)pthread_self(), sig);
+	printf("Thread secondaire, id %u: réception du signal %s\n", (unsigned int)pthread_self(), strsignal(sig));
 
 }
 
