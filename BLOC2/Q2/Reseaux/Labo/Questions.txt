@@ -1,0 +1,103 @@
+QUESTION 11 : car ils n'ont pas la même addresse IP , le PC0 a comme adresse 200.2.1.1 alors que le PC7 a comme ip 200.2.2.4
+
+QUESTION 13 :  car on a modifier l'adresse IP du pc7 en mettant son ip à 200.2.1.5. 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+QUESTION 2 :  tout les paquet on été envoyés
+
+QUESTION 4 :
+
+		  1) Tout les pc sauf le pc0 recoivent le message
+		  2) Seul le pc  PC3 traite le message
+
+
+
+QUESTION 6 :
+
+		 Couche 1 : Physique
+		 Couche 2 : Liaison de donnée
+		 Couche 3 : Reseau
+		 
+		 niveau 3 --> utilise l'adresse IP 
+		 niveau 2 --> utilise la MAC adresse
+		 niveau 1 --> utilise rien 
+		 En vous servant des notes ,Quels sont les noms OSI des couches 1,2,3 ?
+
+		 couche 1 : physique 
+		 couche 2 : liaison de donnée
+		 couche 3 : reseau
+
+		 Ethernet se situe au niveau de la couche 2 donc liaison de donnée
+
+			
+		ICMP  ensuite IP et pour finir EthernetII
+
+		icp de data 50 : 
+
+		ICMP = 50 + 8 = 58 Bytes
+		IP = 58 + 20 = 78 Bytes
+		EthernetII 6 + 6 + 2 + 78 = 92 Bytes 
+
+QUESTION 7 
+ 		 au niveau 1 du model osi 
+			
+		Adresse MAC et IP
+
+		
+
+		 
+
+QUESTION 15 : 
+
+Il faut mettre l'adresse ip du serveur dans l'option DNS Serveur du PC0
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Exercice 31 : voir la question 6 
+
+Question 6 : 
+
+		Il faut mettre au pc une configuratin dynamique en dhcp pour l'adresse IP et pas en statique
+
+		PC>ipconfig /renew
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Exercice 35 :
+
+		Protocole TCP/UDP et Adresse
+		Protocole IPV4 et Adresse IP
+		Protocole Ethernet et Mac Adresse
+		Protocole Ethernet et Pas d'adresse
+
+		couche 1 : physique 
+		couche 2 : liaison de donnée
+		couche 3 : reseau
+		couche 4 : Transport
+
+
+		DNS QUERY
+		DNS HEADER
+		UDP
+		IP
+		ETHERNETII
+
+tailles respectives au niveau 4,3,2
+
+		DNS = 40 + 8 = 48 Bytes
+		IP = 48 + 20 = 68 Bytes
+		EthernetII 6 + 6 + 2 + 68 = 82 Bytes
+		Longueur réelle de la trame 
+		68 + 6 + 6 + 2 + 8 + 4 = 94 Bytes
+
+
+switch : jusqu'au Niveau 2 
+
+Il manipule la Mac Adresse
+
+
+
