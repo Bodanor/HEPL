@@ -62,9 +62,9 @@ union
 } u_capt;
 
 void printSuiviPiece(void);
-void* FctMouvement(void *);
-void* FctAffichage(void*);	
-
+void *FctMouvement(void *);
+void *FctAffichage(void *);
+void *FctCapteurs(void *);
 
 int fd_petra_in, fd_petra_out;
 
@@ -72,7 +72,8 @@ main()
 {
 	pthread_t thread_mvmt;
 	pthread_t thread_affichage;
-	
+	pthread_t thread_capteurs;
+
 	int rc, cpt, ret;
 
 	unsigned int c;
@@ -101,33 +102,35 @@ main()
 	else
 		printf("MAIN: PETRA_IN opened\n");
 
-
 	ret = pthread_create(&thread_mvmt, NULL, FctMouvement, NULL);
-	if (ret != 0) {
+	if (ret != 0)
+	{
+		perror("Erreur de creation du thread de lecture de capteurs !\n");
+		return -1;
+	}
+
+	ret = pthread_create(&thread_capteurs, NULL, FctCapteurs, NULL);
+	if (ret != 0)
+	{
 		perror("Erreur de creation du thread de lecture de capteurs !\n");
 		return -1;
 	}
 
 	ret = pthread_join(thread_mvmt, NULL);
-	if (ret != 0) {
+	if (ret != 0)
+	{
 		perror("Erreur de synchronisation de thread !\n");
 		return -1;
 	}
-	
+
+	ret = pthread_join(thread_capteurs, NULL);
+	if (ret != 0)
+	{
+		perror("Erreur de synchronisation de thread !\n");
+		return -1;
+	}
 }
 
-
-/* Tu prefere avoir un truc genre comme ca : 
-
-	Piece au debut du charriot []
-	Piece au debut du convoyeur 1 []
-	piece au mileu du convoyeur 1 []
-	Piece à la fin du convoyeur 1 [*]
-	Piece au debut du convoyeur 2 []
-	piece au mileu du convoyeur 2 []
-	Piece à la fin du convoyeur 2 []
-	Piece dans le bac de destination []
-*/
 void printSuiviPiece(void)
 {
 
@@ -143,25 +146,26 @@ void printSuiviPiece(void)
 	fflush(stdout);
 }
 
-
-void* FctMouvement(void* p)
+void *FctMouvement(void *p)
 {
 
 	int rc, compteur_slot;
 	struct CAPTEURS previous_capteurs_struct;
 	unsigned char previous_capteurs_byte;
-	
-
-	read(fd_petra_in, &u_capt.byte, 1);
+	clock_t previous_clock, end;
+	int slot = 0;
+	double temps_piece;
+	struct timespec temps;
 
 	while (1)
 	{
+		read(fd_petra_in, &u_capt.byte, 1);
 
 		compteur_slot = 0; // Pour plus tard pour l'etat pour slot
 
 		previous_capteurs_byte = u_capt.byte;
 		/* Tant que l'etat des capteurs a pas change, on ne fait rien */
-		u_act.act.PV = 0;		
+		u_act.act.PV = 0;
 		u_act.act.CP = 0; // Le plongeur est en position 0 initialement
 		rc = write(fd_petra_out, &u_act.byte, 1);
 		if (rc <= 0)
@@ -169,14 +173,9 @@ void* FctMouvement(void* p)
 			perror("Erreur d'ecriture : ");
 		}
 
-		read(fd_petra_in, &u_capt.byte, 1);
-
 		/* Tant que pas au debut on attend*/
-		while(u_capt.capt.CS == 1)
+		while (u_capt.capt.CS == 1)
 			;
-		
-
-		read(fd_petra_in, &u_capt.byte, 1);
 
 		if (u_capt.capt.DE == 0)
 		{
@@ -187,26 +186,25 @@ void* FctMouvement(void* p)
 				perror("Erreur d'ecriture : ");
 			}
 			sleep(2);
-				
+
 			u_act.act.PV = 1;
 			rc = write(fd_petra_out, &u_act.byte, 1);
 			if (rc <= 0)
 			{
 				perror("Erreur d'ecriture : ");
 			}
-			
+
 			u_act.act.PA = 0;
 			rc = write(fd_petra_out, &u_act.byte, 1);
 			if (rc <= 0)
 			{
 				perror("Erreur d'ecriture : ");
 			}
+
+			while (u_capt.capt.PP == 1)
+				;
 			
-			read(fd_petra_in, &u_capt.byte, 1);
-			while (u_capt.capt.PP == 1){
-					read(fd_petra_in, &u_capt.byte, 1);
-					}
-						
+
 			u_act.act.CP = 1;
 			rc = write(fd_petra_out, &u_act.byte, 1);
 			if (rc <= 0)
@@ -214,11 +212,10 @@ void* FctMouvement(void* p)
 				perror("Erreur d'ecriture : ");
 			}
 			sleep(1); // Teporisation pour capteur
-			read(fd_petra_in, &u_capt.byte, 1);
 			/* Tant que en mouvement, on fait rien */
-			while(u_capt.capt.CS == 1)
-					read(fd_petra_in, &u_capt.byte, 1);
-					
+			while (u_capt.capt.CS == 1)
+				;
+
 			/* On lache la piece sur le convoyeur 1*/
 			u_act.act.PV = 0;
 			u_act.act.C1 = 1;
@@ -228,152 +225,180 @@ void* FctMouvement(void* p)
 				perror("Erreur d'ecriture : ");
 			}
 
-			read(fd_petra_in, &u_capt.byte, 1);
+			
 			while (u_capt.capt.S == 0)
-				read(fd_petra_in, &u_capt.byte, 1);
+				;
 
 			/* Piece au debut du capteur S a partir d'ici*/
+			previous_clock = clock();
 
-			read(fd_petra_in, &u_capt.byte, 1);
-			while (u_capt.capt.S == 1) {
-				read(fd_petra_in, &u_capt.byte, 1);
-				nanosleep(10000);
-				while (u_capt.capt.S == 0 && compteur_slot != 1)
-				{
-					compteur_slot = 1;
-				}
+			;
+			while (u_capt.capt.S == 1)
+				;
+
+			end = clock();
+
+			temps_piece = ((double)(end - previous_clock)) / CLOCKS_PER_SEC;
+
+			/* Si une piece sans slot*/
+			if (temps_piece >= 0.05)
+			{
+				temps.tv_sec = 0;
+				temps.tv_nsec = 800000000;
+				slot = 0;
+				nanosleep(&temps, NULL);
+			}
+			/* Piece avec slot donc temps d'attente plus long */
+			else
+			{
+				temps.tv_sec = 2;
+				temps.tv_nsec = 0;
+				nanosleep(&temps, NULL);
+				slot = 1;
+				printf("Piece avec slot\n");
 			}
 
-			int finis = 0;
-			while (!finis) {
-				read(fd_petra_in, &u_capt.byte, 1);
+			/* Stop du convoyeur 1 et activation du verrou du bras */
+			u_act.act.C1 = 0;
+			u_act.act.GA = 1;
+			rc = write(fd_petra_out, &u_act.byte, 1);
+			if (rc <= 0)
+			{
+				perror("Erreur d'ecriture : ");
+			}
+			temps.tv_sec = 1;
+			temps.tv_nsec = 0;
+			nanosleep(&temps, NULL);
 
-				if (u_capt.capt.S == 0) 
-				{
-					// Demarrage timer
-					while( !finis)
-					{
-
-					}
-					read(fd_petra_in, &u_capt.byte, 1);
-					if (u_capt.capt.S == 1)
-					{
-						compteur_slot = 1;
-					}
-					else
-						compteur_slot = 0;
-				}
+			/* Activation du convoyeur 2 et basculement du bras */
+			u_act.act.AA = 1;
+			u_act.act.C2 = 1;
+			rc = write(fd_petra_out, &u_act.byte, 1);
+			if (rc <= 0)
+			{
+				perror("Erreur d'ecriture : ");
 			}
 
-			/*
-while (previous_capteurs_byte != u_capt.byte)
-{
+			temps.tv_sec = 1;
+			temps.tv_nsec = 200000000;
+			nanosleep(&temps, NULL);
 
-	if (u_capt.capt.S != previous_capteurs_struct.S)
-	{
+			/* On lache le verrou du convoyeur 2 */
+			u_act.act.GA = 0;
 
+			rc = write(fd_petra_out, &u_act.byte, 1);
+			if (rc <= 0)
+			{
+				perror("Erreur d'ecriture : ");
+			}
+
+			
+			while (u_capt.capt.L2 == 0)
+				;
+
+			
+			while (u_capt.capt.L2 == 1)
+				;
+			temps.tv_sec = 0;
+			temps.tv_nsec = 650000000;
+			nanosleep(&temps, NULL);
+
+			/* Stop du convoyeur 2*/
+			u_act.act.C2 = 0;
+			rc = write(fd_petra_out, &u_act.byte, 1);
+			if (rc <= 0)
+			{
+				perror("Erreur d'ecriture : ");
+			}
+
+			/* Si slot alors on active le convoyeur 2 pour que la piece tombe dans le bac puis stop du convoyeur 2 */
+			if (slot == 1)
+			{
+				u_act.act.C2 = 1;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				temps.tv_sec = 2;
+				temps.tv_nsec = 0;
+				nanosleep(&temps, NULL);
+				u_act.act.C2 = 0;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+			}
+			/* Si pas de slot alors mouvement du plongeur en position 1 puis lachement de la piece */
+			else
+			{
+				printf("Piece sans slot\n");
+				printf("deplacement vers position 3\n");
+				u_act.act.CP = 3;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				temps.tv_sec = 0;
+				temps.tv_nsec = 500000000;
+				nanosleep(&temps, NULL);
+				
+				/* Tant que en mouvement, on fait rien */
+				while (u_capt.capt.CS == 1)
+					;
+
+				u_act.act.PA = 1;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				sleep(2);
+				u_act.act.PV = 1;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				u_act.act.PA = 0;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				
+				while (u_capt.capt.PP == 1)
+					;
+				u_act.act.CP = 2;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+				temps.tv_sec = 0;
+				temps.tv_nsec = 500000000;
+				nanosleep(&temps, NULL);
+			
+				/* Tant que en mouvement, on fait rien */
+				while (u_capt.capt.CS == 1)
+					
+
+				u_act.act.PV = 0;
+				rc = write(fd_petra_out, &u_act.byte, 1);
+				if (rc <= 0)
+				{
+					perror("Erreur d'ecriture : ");
+				}
+			}
+		}
 	}
-
-	if(u_capt.capt.L1 != previous_capteurs_struct.L1)
-		;
-	// A completer
 }
-*/
 
-
-		}
-		
-
-		/* Si un capteur change, on regarde lequel a changer d'etat */
-
-		
-		/*
-		u_act.byte = 0; // Debut du tour de boucle
-		previous_capteurs_byte = 0
-
-		
-		u_act.act.CP = 0; // Le plongeur est en position 0
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		while (u_capt.capt.L1 != 0)
-			;
-		
-		while(u_capt.capt.S != 0)
-			;
-		while (u_capt.)
-		if (u_capt.capt.)
-			u_act.act.AA = 0;
-		u_act.act.PA = 1;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(2);
-		u_act.act.PV = 1;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(1);
-		u_act.act.PA = 0;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(2);
-		u_act.act.CP = 1;//Le plongeur est en position 0
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'eccriture : ");
-		}
-		sleep(4);
-		u_act.act.PV = 0;
-		u_act.act.C1 = 1;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(9);
-		u_act.act.C1 = 0;
-		u_act.act.GA = 1;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(1);
-		u_act.act.AA = 1;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(3);
-		u_act.act.C2 = 1;
-		u_act.act.GA = 0;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		sleep(9);
-		u_act.act.C2 = 0;
-		rc = write(fd_petra_out, &u_act.byte, 1);
-		if (rc <= 0)
-		{
-			perror("Erreur d'ecriture : ");
-		}
-		*/
-
-
-	}
-
+void *FctCapteurs(void *)
+{
+	while (1)
+		read(fd_petra_in, &u_capt.byte, 1);
+	
 }
