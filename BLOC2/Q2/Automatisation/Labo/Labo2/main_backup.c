@@ -103,14 +103,14 @@ main()
 	/* Affichage générale */
 	printf("\033[2J");
 	fflush(stdout);
-	printf("Pièce au début du chariot\t[   ]\n");
-	printf("Pièce au début du convoyeur 1\t[   ]\n");
-	printf("Pièce au milieu du convoyeur 1\t[   ] \n");
-	printf("Pièce à la fin du convoyeur 1\t[   ]\n");
-	printf("Pièce au début du convoyeur 2\t[   ]\n");
-	printf("Pièce au milieu du convoyeur 2\t[   ]\n");
-	printf("Pièce à la fin du convoyeur 2\t[   ]\n");
-	printf("Pièce dans le bac\t\t[   ]\n");
+	printf("Piece au debut du chariot\t[   ]\n");
+	printf("Piece au debut du convoyeur 1\t[   ]\n");
+	printf("Piece au milieu du convoyeur 1\t[   ] \n");
+	printf("Piece a la fin du convoyeur 1\t[   ]\n");
+	printf("Piece au debut du convoyeur 2\t[   ]\n");
+	printf("Piece au milieu du convoyeur 2\t[   ]\n");
+	printf("Piece a la fin du convoyeur 2\t[   ]\n");
+	printf("Piece dans le bac\t\t[   ]\n");
 
 	fflush(stdout);
 
@@ -216,8 +216,8 @@ void *FctMouvement(void *p)
 
 		compteur_slot = 0; // Pour plus tard pour l'etat pour slot
 
-		/*previous_capteurs_byte = u_capt.byte;
-		 Tant que l'etat des capteurs a pas change, on ne fait rien
+		previous_capteurs_byte = u_capt.byte;
+
 		u_act.act.PV = 0;
 		u_act.act.CP = 0; // Le plongeur est en position 0 initialement
 		rc = write(fd_petra_out, &u_act.byte, 1);
@@ -228,10 +228,10 @@ void *FctMouvement(void *p)
 
 		read(fd_petra_in, &u_capt.byte, 1);
 
-		 Tant que pas au debut on attend
+
 		while (u_capt.capt.CS ==1)
 			read(fd_petra_in, &u_capt.byte, 1);
-			*/
+			
 
 		if (u_capt.capt.DE == 0)
 		{
@@ -372,7 +372,7 @@ void *FctMouvement(void *p)
 			if (rc <= 0)
 			{
 				perror("Erreur d'ecriture : ");
-			}
+				}
 			printSuiviPiece(6);
 			/* Si slot alors on active le convoyeur 2 pour que la piece tombe dans le bac puis stop du convoyeur 2 */
 			if (slot == 1)
@@ -456,15 +456,31 @@ void *FctMouvement(void *p)
 				}
 				
 				u_act.act.CP = 0;
+				u_act.act.AA = 0;
 				rc = write(fd_petra_out, &u_act.byte, 1);
 				if (rc <= 0)
 				{
 					perror("Erreur d'ecriture : ");
 				}
-				sleep(7);
+				
 		
 
 			}
+				u_act.act.PV = 0;
+					u_act.act.AA = 0;
+			u_act.act.CP = 0; // Le plongeur est en position 0 initialement
+		rc = write(fd_petra_out, &u_act.byte, 1);
+		if (rc <= 0)
+		{
+			perror("Erreur d'ecriture : ");
+		}
+
+		read(fd_petra_in, &u_capt.byte, 1);
+
+
+		while (u_capt.capt.CS ==1)
+			read(fd_petra_in, &u_capt.byte, 1);
+			sleep(5);
 			printSuiviPiece(7);
 		}
 	}
